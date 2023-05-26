@@ -1,0 +1,51 @@
+header{
+    height: 30rem;
+    background-image: url(../../../assets/imagenes/chroma.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+
+header h1{
+    font-family: 'Lobster', cursive;
+    font-size: 80px;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+}
+
+/*Main*/
+
+.bienvenida{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    font-family: 'Raleway', sans-serif;
+    gap: 30px;
+}
+
+.bienvenida h2{
+    text-align: center;
+    font-size: 30px;
+}
+
+.bienvenida-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.bienvenida-img img{
+    width: 30rem;
+    border-radius: 10px;
+}
+.bienvenida-img p{
+    margin-top: 10px;
+    text-align: justify;
+    width: 60vh;
+}
+
