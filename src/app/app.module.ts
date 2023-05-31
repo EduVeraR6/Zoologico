@@ -1,19 +1,24 @@
+//Modules
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { MaterialModule } from './shared/material.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponentComponent } from './componentes/nav-component/nav-component.component';
-import { MaterialModule } from './material/material.module';
-import { FooterComponent } from './componentes/footer/footer.component';
-import { InicioComponentComponent } from './componentes/inicio-component/inicio-component.component';
+
+//Components
+import { AppComponent } from './app.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { NavComponentComponent } from './layouts/nav-component/nav-component.component';
+import { InicioComponentComponent } from './components/inicio-component/inicio-component.component';
+import { ActividadesPageComponent } from './components/actividades-page/actividades-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavComponentComponent,
     FooterComponent,
-    InicioComponentComponent
+    InicioComponentComponent,
+    ActividadesPageComponent
   ],
   imports: [
     BrowserModule,
