@@ -8,18 +8,21 @@ import { NavComponentComponent } from './componentes/nav-component/nav-component
 import { MaterialModule } from './material/material.module';
 import { FooterComponent } from './componentes/footer/footer.component';
 import { InicioComponentComponent } from './componentes/inicio-component/inicio-component.component';
+import { LoginComponent } from './componentes/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     NavComponentComponent,
     FooterComponent,
-    InicioComponentComponent
+    InicioComponentComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
