@@ -4,6 +4,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './shared/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './componentes/login/login.component';
+
 
 //Components
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { NavComponentComponent } from './layouts/nav-component/nav-component.component';
 import { InicioComponentComponent } from './components/inicio-component/inicio-component.component';
 import { ActividadesPageComponent } from './components/actividades-page/actividades-page.component';
+
 import { CarouselActividadesPageComponent } from './layouts/carousel-actividades-page/carousel-actividades-page.component';
 
 @NgModule({
@@ -20,13 +23,15 @@ import { CarouselActividadesPageComponent } from './layouts/carousel-actividades
     FooterComponent,
     InicioComponentComponent,
     ActividadesPageComponent,
-    CarouselActividadesPageComponent
+    CarouselActividadesPageComponent,
+    LoginComponent,
+    ActividadesPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
