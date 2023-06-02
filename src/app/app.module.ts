@@ -11,6 +11,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { NavComponentComponent } from './layouts/nav-component/nav-component.component';
 import { InicioComponentComponent } from './components/inicio-component/inicio-component.component';
 import { ActividadesPageComponent } from './components/actividades-page/actividades-page.component';
+import { CarouselActividadesPageComponent } from './layouts/carousel-actividades-page/carousel-actividades-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ActividadesPageComponent } from './components/actividades-page/activida
     NavComponentComponent,
     FooterComponent,
     InicioComponentComponent,
-    ActividadesPageComponent
+    ActividadesPageComponent,
+    CarouselActividadesPageComponent
   ],
   imports: [
     BrowserModule,

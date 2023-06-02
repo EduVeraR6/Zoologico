@@ -7,3 +7,8 @@
 html{
     scroll-behavior: smooth;
 }
+
+:root{
+    --green: #006400;
+    --brown: #8B4513;
+}

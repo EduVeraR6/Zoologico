@@ -1,0 +1,29 @@
+.container-information{
+    column-count: 3;
+    column-gap: 4rem;
+    column-rule: .2rem solid var(--brown);
+}
+
+p{
+    text-align: justify;
+    font-weight: 500;
+    color: var(--green);
+}
+
+hr{
+    background-color: var(--brown);
+    height: .2rem;
+    opacity: 1;
+}
+
+.container-activities{
+    height: 500px;
+    background: url("../../../assets/img/page-actividades/sol-1-fondo.svg") no-repeat center;
+    background-size: cover;
+}
+
+.description-matutina{
+    font-size: 1.3vw;
+    text-align: right;
+    padding-left: 11rem;
+}
