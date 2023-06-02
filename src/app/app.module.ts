@@ -13,6 +13,9 @@ import { NavComponentComponent } from './layouts/nav-component/nav-component.com
 import { InicioComponentComponent } from './components/inicio-component/inicio-component.component';
 import { ActividadesPageComponent } from './components/actividades-page/actividades-page.component';
 import { CarouselActividadesPageComponent } from './layouts/carousel-actividades-page/carousel-actividades-page.component';
+import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
+import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/carousel-animales-page.component';
+import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { CarouselActividadesPageComponent } from './layouts/carousel-actividades
     ActividadesPageComponent,
     CarouselActividadesPageComponent,
     LoginComponent,
-    ActividadesPageComponent
+    ActividadesPageComponent,
+    NosotrosComponentComponent,
+    CarouselAnimalesPageComponent,
+    AnimalesPageComponent
   ],
   imports: [
     BrowserModule,
