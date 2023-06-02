@@ -1,0 +1,42 @@
+.campos-field {
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.contenedor {
+    max-width: 800px;
+    text-align: center;
+}
+
+.contenedor p {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+}
+
+.botones button {
+    max-width: 200px;
+    margin: 10px;
+}
+
+.boton {
+    display: flex;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 40%;
+}
+
+.example-h2 {
+    margin: 10px;
+}
+
+.example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.example-margin {
+    margin: 0 10px;
+}

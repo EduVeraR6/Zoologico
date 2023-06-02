@@ -16,6 +16,8 @@ import { CarouselActividadesPageComponent } from './layouts/carousel-actividades
 import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
 import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/carousel-animales-page.component';
 import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
+import { VoluntariosComponentComponent } from './components/voluntarios-component/voluntarios-component.component';
+import { RegistrarVoluntariosComponent } from './components/registrar-voluntarios/registrar-voluntarios.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { AnimalesPageComponent } from './components/animales-page/animales-page.
     ActividadesPageComponent,
     NosotrosComponentComponent,
     CarouselAnimalesPageComponent,
-    AnimalesPageComponent
+    AnimalesPageComponent,
+    VoluntariosComponentComponent,
+    RegistrarVoluntariosComponent
   ],
   imports: [
     BrowserModule,

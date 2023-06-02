@@ -8,6 +8,7 @@ import { ActividadesPageComponent } from './components/actividades-page/activida
 import { LoginComponent } from './modules/authentication/login/login.component';
 import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
 import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
+import { VoluntariosComponentComponent } from './components/voluntarios-component/voluntarios-component.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'Login',            component: LoginComponent },
   { path: 'Animales',         component: AnimalesPageComponent },
   { path: 'Nosotros',         component: NosotrosComponentComponent },
+  { path: 'Voluntarios',      component: VoluntariosComponentComponent },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }
 ];
 
