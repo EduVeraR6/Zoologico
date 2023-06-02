@@ -6,12 +6,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { InicioComponentComponent} from './components/inicio-component/inicio-component.component';
 import { ActividadesPageComponent } from './components/actividades-page/actividades-page.component';
 import { LoginComponent } from './modules/authentication/login/login.component';
+import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
+import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},
   { path: 'home',             component: InicioComponentComponent },
   { path: 'actividades',      component: ActividadesPageComponent },
   { path: 'Login',            component: LoginComponent },
+  { path: 'Animales',         component: AnimalesPageComponent },
+  { path: 'Nosotros',         component: NosotrosComponentComponent },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }
 ];
 
