@@ -6,25 +6,21 @@ export interface IActividad {
     cantidadGuias:      number,
     precio:             number,
     descripcion:        string,
-    hora:               Date,
-    imagenes:           IImagen[],
-    personalizado:      boolean,
+    hora:               string,
+    time:               string,
+    imagen:             string,
     estado:             boolean
-}
-
-export interface IImagen {
-    id_imagen:          number,
-    nombre:             string
+    expanded?:          boolean; 
 }
 
 export interface IUsuario {
     id_usuario:         number,
     nombreUsuario:      string,
     telefono:           number,
-    correo:             string,
     cantidadPersonas:   number,
     cantidadGuias:      number,
     precio:             number,
-    hora:               Date,
+    hora:               string,
+    descripcion:        string,
     estado:             boolean
 }
