@@ -1,0 +1,19 @@
+<app-nav-component></app-nav-component>
+
+
+<div class="voluntarios-container">
+    <h1>Información de Voluntarios</h1>
+    <div *ngFor="let voluntario of voluntarios" class="voluntario-card">
+        <h2>{{ voluntario.nombre }}</h2>
+        <p>{{ voluntario.edad }} años</p>
+        <p>{{ voluntario.descripcion }}</p>
+    </div>
+</div>
+
+<section class="final">
+    <p>"¡Únete a nuestra familia de voluntarios y sé parte del cambio! Tu compromiso y pasión pueden marcar la diferencia en la vida de los animales y en la conservación de nuestro entorno natural."</p>
+
+    <button mat-raised-button (click)="openDialog()" color="warn">¡Inscríbite!</button>
+</section>
+
+<app-footer></app-footer>

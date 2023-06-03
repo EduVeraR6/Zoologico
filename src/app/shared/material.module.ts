@@ -12,6 +12,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 @NgModule({
   declarations: [],
   imports: [
@@ -20,6 +23,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   exports:[
     MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
     MatIconModule,
