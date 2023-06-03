@@ -9,18 +9,18 @@ export class ToastService {
   constructor(private toastr: ToastrService) { }
 
   success(message: string, title: string){
-    this.toastr.success(title, message)
+    this.toastr.success(message, title)
   }
 
   error(message: string, title: string){
-    this.toastr.error(title, message)
+    this.toastr.error(message, title)
   }
 
   warning(message: string, title: string){
-    this.toastr.warning(title, message)
+    this.toastr.warning(message, title)
   }
 
   info(message: string, title: string){
-    this.toastr.info(title, message)
+    this.toastr.info(message, title)
   }
 }
