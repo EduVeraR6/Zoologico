@@ -19,6 +19,11 @@ import { AdministratorModuleComponent } from './modules/dashboard/administrator-
 import { CarouselActividadesPageComponent } from './layouts/carousel-actividades-page/carousel-actividades-page.component';
 import { ActividadesMatutinasLayoutsComponent } from './layouts/actividades-matutinas-layouts/actividades-matutinas-layouts.component';
 import { ActividadesVespertinasLayoutsComponent } from './layouts/actividades-vespertinas-layouts/actividades-vespertinas-layouts.component';
+import { VoluntariosComponentComponent } from './components/voluntarios-component/voluntarios-component.component';
+import { RegistrarVoluntariosComponent } from './components/registrar-voluntarios/registrar-voluntarios.component';
+import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
+import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
+import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/carousel-animales-page.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,12 @@ import { ActividadesVespertinasLayoutsComponent } from './layouts/actividades-ve
     ActividadesPageComponent,
     ActividadesMatutinasLayoutsComponent,
     ActividadesVespertinasLayoutsComponent,
-    AdministratorModuleComponent
+    AdministratorModuleComponent,
+    VoluntariosComponentComponent,
+    RegistrarVoluntariosComponent,
+    NosotrosComponentComponent,
+    AnimalesPageComponent,
+    CarouselAnimalesPageComponent
   ],
   imports: [
     BrowserModule,
