@@ -1,0 +1,19 @@
+h2{
+    margin-top: 40px;
+    text-align: center;
+    color: var(--green);
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 60px;
+}
+
+.lista-animales{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+}
+

@@ -29,6 +29,7 @@ import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividad
 import { SettingActivitiesAddeditComponent } from './modules/dashboard/actitividades-module/setting-activities-addedit/setting-activities-addedit.component';
 import { SettingActivitiesDeleteComponent } from './modules/dashboard/actitividades-module/setting-activities-delete/setting-activities-delete.component';
 import { SettingActivitiesInfoComponent } from './modules/dashboard/actitividades-module/setting-activities-info/setting-activities-info.component';
+import { AnimalesListaLayoutsComponent } from './layouts/animales-lista-layouts/animales-lista-layouts.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { SettingActivitiesInfoComponent } from './modules/dashboard/actitividade
     SettingActivitiesDefaultComponent,
     SettingActivitiesAddeditComponent,
     SettingActivitiesDeleteComponent,
-    SettingActivitiesInfoComponent
+    SettingActivitiesInfoComponent,
+    AnimalesListaLayoutsComponent
   ],
   imports: [
     BrowserModule,
