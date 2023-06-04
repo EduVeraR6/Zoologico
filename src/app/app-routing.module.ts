@@ -9,6 +9,9 @@ import { LoginComponent } from './modules/authentication/login/login.component';
 import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
 import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
 import { VoluntariosComponentComponent } from './components/voluntarios-component/voluntarios-component.component';
+import { AdministratorModuleComponent } from './modules/dashboard/administrator-module/administrator-module.component';
+import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitividades-module/setting-activities-default/setting-activities-default.component';
+import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividades-module/setting-activities-users/setting-activities-users.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},
@@ -18,6 +21,12 @@ const routes: Routes = [
   { path: 'Animales',         component: AnimalesPageComponent },
   { path: 'Nosotros',         component: NosotrosComponentComponent },
   { path: 'Voluntarios',      component: VoluntariosComponentComponent },
+  { path: 'administrator',    component:  AdministratorModuleComponent,
+    children: [
+      { path: 'default-activities',             component: SettingActivitiesDefaultComponent },
+      { path: 'users-activities',               component: SettingActivitiesUsersComponent }
+    ]
+  },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }
 ];
 

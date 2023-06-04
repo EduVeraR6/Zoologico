@@ -24,6 +24,11 @@ import { RegistrarVoluntariosComponent } from './components/registrar-voluntario
 import { NosotrosComponentComponent } from './components/nosotros-component/nosotros-component.component';
 import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
 import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/carousel-animales-page.component';
+import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitividades-module/setting-activities-default/setting-activities-default.component';
+import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividades-module/setting-activities-users/setting-activities-users.component';
+import { SettingActivitiesAddeditComponent } from './modules/dashboard/actitividades-module/setting-activities-addedit/setting-activities-addedit.component';
+import { SettingActivitiesDeleteComponent } from './modules/dashboard/actitividades-module/setting-activities-delete/setting-activities-delete.component';
+import { SettingActivitiesInfoComponent } from './modules/dashboard/actitividades-module/setting-activities-info/setting-activities-info.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +47,12 @@ import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/
     RegistrarVoluntariosComponent,
     NosotrosComponentComponent,
     AnimalesPageComponent,
-    CarouselAnimalesPageComponent
+    CarouselAnimalesPageComponent,
+    SettingActivitiesUsersComponent,
+    SettingActivitiesDefaultComponent,
+    SettingActivitiesAddeditComponent,
+    SettingActivitiesDeleteComponent,
+    SettingActivitiesInfoComponent
   ],
   imports: [
     BrowserModule,

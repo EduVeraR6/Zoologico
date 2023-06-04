@@ -17,7 +17,7 @@ export class ActividadesVespertinasLayoutsComponent implements OnInit{
   constructor(private _actividadesServices: ActividadServiceService) {}
 
   ngOnInit() {
-    this.actividades = this._actividadesServices.actividadesManana.filter(elemento => elemento.hora.includes('P.M'));
+    this.actividades = this._actividadesServices.actividades.filter(elemento => elemento.hora.includes('P.M'));
     this.updatePaginatedActividades();
   }
 
