@@ -1,12 +1,21 @@
 h2{
     margin-top: 40px;
     text-align: center;
-    color: var(--green);
+    color: #fff;
     font-weight: bold;
     font-size: 40px;
-    margin-bottom: 60px;
 }
 
+mat-card{
+    margin-top: 30px;
+    width: 50%;
+    background-color: #efefef;
+}
+p{
+    width: 100%;
+    text-align: justify;
+    color: black;
+}
 .lista-animales{
     width: 100%;
     height: 100%;
@@ -15,5 +24,44 @@ h2{
     gap: 100px;
     justify-content: center;
     align-items: center;
+    background-color: var(--green-2);
+    padding-bottom: 30px;
+
 }
+
+.cabecera-lista-animales {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.img-lista-animales{
+    width: 100px;
+
+}
+
+#imagen-fondo1{
+    width: 300px;
+    position: absolute;
+    top: 100vh;
+    left: 150vh;
+}
+
+
+#imagen-fondo2{
+    width: 350px;
+    position: absolute;
+    top: 100vh;
+    right: 140vh;
+}
+
+app-animales-lista-layouts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 

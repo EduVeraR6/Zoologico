@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ImageDialogComponent } from 'src/app/shared/ImageDialogComponent';
 import { IAnimales } from 'src/app/interfaces/ianimales';
 import { AnimalesService } from 'src/app/services/animales-service.service';
 
@@ -14,12 +16,21 @@ export class AnimalesListaLayoutsComponent implements OnInit{
   tamañoPagina = 5;
   paginaActual =0;
 
-  constructor(private animalesServices : AnimalesService){}
+  constructor(private animalesServices : AnimalesService, private dialog: MatDialog ){}
 
   ngOnInit(): void {
     this.animales = this.animalesServices.animales.filter(elemento => elemento.especie);
     this.updatePaginatedAnimales();
   }
+
+  //Zoom Imagen
+  openDialog(imageUrl: string): void {
+    this.dialog.open(ImageDialogComponent, {
+      data: { imageUrl },
+      panelClass: 'custom-dialog-container' // Clase CSS personalizada para el diálogo
+    });
+  }
+  
 
   updatePaginatedAnimales() {
     const startIndex = this.paginaActual * this.tamañoPagina;
@@ -29,7 +40,6 @@ export class AnimalesListaLayoutsComponent implements OnInit{
       this.paginasAnimales[i].expanded = false;
     }
   }
-
 
   goToPage(page: number) {
     this.paginaActual = page;
@@ -44,9 +54,9 @@ export class AnimalesListaLayoutsComponent implements OnInit{
   }
 
   previousPage() {
-    if (this.paginaActual> 0) {
+    if (this.paginaActual > 0) {
       this.paginaActual--;
-      this.updatePaginatedAnimales;
+      this.updatePaginatedAnimales();
     }
   }
 

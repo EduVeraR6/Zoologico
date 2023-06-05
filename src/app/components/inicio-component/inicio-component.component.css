@@ -18,6 +18,9 @@ header h1 {
 
 /*Main*/
 
+main{
+    margin-bottom: 30px;
+}
 .bienvenida {
     display: flex;
     flex-direction: column;

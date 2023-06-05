@@ -17,6 +17,22 @@ export class AnimalesService{
         {
           id_animales :2,nombre : "Tigre de Bengala", edad : 5, especie : "Panthera tigris tigris", genero:"Macho" , habitat:"Los tigres de Bengala habitan en diversos hábitats como bosques tropicales, manglares y áreas de vegetación densa cercanas a fuentes de agua.",observaciones:"Los tigres de Bengala son conocidos por su pelaje anaranjado con rayas negras características. Son la subespecie de tigre más numerosa y se consideran en peligro de extinción debido a la destrucción de su hábitat y la caza furtiva.",origen : "Los tigres de Bengala son nativos de la región de Bengala en el subcontinente indio, incluyendo Bangladesh, India, Nepal y Bután."
           ,estado : true, imagen : "tigre-bengala.jpg"
+        },
+        {
+          id_animales :2,nombre : "Tigre de Bengala", edad : 5, especie : "Panthera tigris tigris", genero:"Macho" , habitat:"Los tigres de Bengala habitan en diversos hábitats como bosques tropicales, manglares y áreas de vegetación densa cercanas a fuentes de agua.",observaciones:"Los tigres de Bengala son conocidos por su pelaje anaranjado con rayas negras características. Son la subespecie de tigre más numerosa y se consideran en peligro de extinción debido a la destrucción de su hábitat y la caza furtiva.",origen : "Los tigres de Bengala son nativos de la región de Bengala en el subcontinente indio, incluyendo Bangladesh, India, Nepal y Bután."
+          ,estado : true, imagen : "tigre-bengala.jpg"
+        },
+        {
+          id_animales :2,nombre : "Tigre de Bengala", edad : 5, especie : "Panthera tigris tigris", genero:"Macho" , habitat:"Los tigres de Bengala habitan en diversos hábitats como bosques tropicales, manglares y áreas de vegetación densa cercanas a fuentes de agua.",observaciones:"Los tigres de Bengala son conocidos por su pelaje anaranjado con rayas negras características. Son la subespecie de tigre más numerosa y se consideran en peligro de extinción debido a la destrucción de su hábitat y la caza furtiva.",origen : "Los tigres de Bengala son nativos de la región de Bengala en el subcontinente indio, incluyendo Bangladesh, India, Nepal y Bután."
+          ,estado : true, imagen : "tigre-bengala.jpg"
+        },
+        {
+          id_animales :2,nombre : "Tigre de Bengala", edad : 5, especie : "Panthera tigris tigris", genero:"Macho" , habitat:"Los tigres de Bengala habitan en diversos hábitats como bosques tropicales, manglares y áreas de vegetación densa cercanas a fuentes de agua.",observaciones:"Los tigres de Bengala son conocidos por su pelaje anaranjado con rayas negras características. Son la subespecie de tigre más numerosa y se consideran en peligro de extinción debido a la destrucción de su hábitat y la caza furtiva.",origen : "Los tigres de Bengala son nativos de la región de Bengala en el subcontinente indio, incluyendo Bangladesh, India, Nepal y Bután."
+          ,estado : true, imagen : "tigre-bengala.jpg"
+        },
+        {
+          id_animales :2,nombre : "Tigre de Bengala", edad : 5, especie : "Panthera tigris tigris", genero:"Macho" , habitat:"Los tigres de Bengala habitan en diversos hábitats como bosques tropicales, manglares y áreas de vegetación densa cercanas a fuentes de agua.",observaciones:"Los tigres de Bengala son conocidos por su pelaje anaranjado con rayas negras características. Son la subespecie de tigre más numerosa y se consideran en peligro de extinción debido a la destrucción de su hábitat y la caza furtiva.",origen : "Los tigres de Bengala son nativos de la región de Bengala en el subcontinente indio, incluyendo Bangladesh, India, Nepal y Bután."
+          ,estado : true, imagen : "tigre-bengala.jpg"
         }
 
     ]

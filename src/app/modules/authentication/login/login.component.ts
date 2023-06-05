@@ -38,6 +38,11 @@ export class LoginComponent {
       this.router.navigate(['administrator'])
       this.nombreUser=this.form.value.usuario;
       this._loginService.nombreUsuario=this.nombreUser;
+    }else if (this.form.value.usuario=="eduardo" && this.form.value.password=="123") {
+      alert("Inicio de sesion correcto")
+      this.router.navigate(['administrator'])
+      this.nombreUser=this.form.value.usuario;
+      this._loginService.nombreUsuario=this.nombreUser;
     }else if(this.form.invalid){
       this.toast.error("Todos los campos son obligatorio","Error");
       return

@@ -11,7 +11,8 @@ html{
 }
 
 :root{
+    --green-2 : #009f04;
     --green: #006400;
     --brown: #8B4513;
-    --green-login : #ccffbb;
+    --orange :#FFA500;
 }

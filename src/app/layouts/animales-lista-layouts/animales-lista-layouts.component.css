@@ -1,69 +1,149 @@
-.animal{
+h2 {
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 25px;
+}
+
+mat-panel-title {
+    padding: 100px;
+}
+
+.container-animales {
+    width: 70%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    width: 100%;
+
 }
 
-.animal h3{
-    font-size: 30px;
+.animal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    padding: 40px;
+}
+
+.info-animal {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+}
+
+.item-info-animal {
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.card-body {
+    background-color: var(--green);
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.animal h3 {
+    font-size: 20px;
     color: var(--brown);
 }
 
-.animal span{
-    color: var(--green);
+.animal span {
+    text-align: center;
+
 }
 
-.animal h5{
+.animal h5 {
     width: 50%;
     text-align: center;
     font-size: 20px;
 }
 
-.imagen-animal{
+.imagen-animal {
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.imagen-animal:hover .overlay {
+    opacity: 1;
+}
+
+.overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: #fff;
+    font-family: 'Raleway';
+    font-size: 20px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.imagen-animal img {
+    border-radius: 10px;
     width: 500px;
 }
 
-
-.imagen-animal img{
-    border-radius: 10px;
+.imagen-animal:hover {
+    cursor: pointer;
+    opacity: 0.9;
 }
 
-p{
+.dato-curioso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--orange);
     text-align: center;
-    font-weight: 500;
-    width: 50%;
 }
 
-.card-caja{
+.card-caja {
     background-size: cover;
+
 }
 
 h1 {
-  font-family: 'Sarpanch', sans-serif;
-  font-size: 2.4em;
-  padding: 5px;
-  color: var(--brown);
-  text-shadow: .4vmin .2vmin rgb(198, 198, 185);
-  letter-spacing: .1rem;
+    font-family: 'Raleway';
+    color: #f5f5f5;
+    text-align: center;
+    padding: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    border: 3px solid #f5f5f5;
 }
 
 .example-headers-align .mat-expansion-panel-header-description {
     justify-content: space-between;
     align-items: center;
 }
-  
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+
+.example-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
     margin-left: 8px;
 }
 
-mat-panel-description mat-icon{
+mat-panel-description mat-icon {
     width: 75%;
 }
 
-mat-icon{
+mat-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,32 +156,36 @@ mat-icon{
     border-right: 1px solid var(--green);
 }
 
-#flechas{
+#flechas {
     margin-top: 20px;
 }
 
-.btn mat-icon{
-    font-size: small;
+.btn mat-icon {
+    font-size: large;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 40px;
 }
 
-.btn-next{
-    border-radius: 0 0 5px 0 ;
+.btn-next {
+    border-radius: 0 0 5px 0;
 }
 
-.btn-next:hover{
+.btn-next:hover {
     background-color: var(--green);
     color: white;
 }
 
-.btn:disabled{
+.btn:disabled {
     border: none;
 }
 
-.btn-return{
+.btn-return {
     border-radius: 0 0 0 5px;
 }
 
-.btn-return:hover{
+.btn-return:hover {
     background-color: var(--brown);
     color: white;
 }
@@ -114,12 +198,12 @@ mat-icon{
     .main-col {
         flex-basis: 100%;
     }
-    
-    .card-img{
+
+    .card-img {
         width: 20%;
     }
 
-    .card-text{
+    .card-text {
         font-size: smaller;
     }
 }

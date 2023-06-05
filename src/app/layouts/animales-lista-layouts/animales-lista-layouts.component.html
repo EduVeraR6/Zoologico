@@ -1,49 +1,80 @@
-<div >
-    <div >            
-        <div >
-            <div >
-                <div class="card-body">
-                    <mat-accordion class="example-headers-align">
-                        <mat-expansion-panel  *ngFor="let item of paginasAnimales"  [expanded]="item.expanded">
-                            <mat-expansion-panel-header>
-                                <mat-panel-title class="text-capitalize">{{item.nombre}}</mat-panel-title>
-                                <mat-panel-description>Especie: {{item.especie}}
-                                    <img src="../../../assets/img/page-animales/zoologia.png" alt="icono">
-                                </mat-panel-description>
-                            </mat-expansion-panel-header>    
+<div class="container-animales">
+    <div class="card-body">
+        <h1>Información de cada Especie</h1>
+        <mat-accordion class="example-headers-align">
+            <mat-expansion-panel *ngFor="let item of paginasAnimales" [expanded]="item.expanded">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="text-capitalize">{{item.nombre}}</mat-panel-title>
+                    <mat-panel-description>Especie: {{item.especie}}
+                        <img src="../../../assets/img/page-animales/zoologia.png" alt="icono">
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
 
-                            <div class="card border-0">
-                                <div>
-                                    <div >
-                                        <div class="card-body" class="animal">
-                                            <h3 class="card-title">{{item.nombre}}</h3>
-                                            <div class="imagen-animal">
-                                                <img src="../../../assets/img/page-animales/fotos/{{item.imagen}}" class="card-img" alt="mono Capuchino">
-                                            </div>
-                                            <h5><span>Especie:</span> {{item.especie}}</h5>
-                                            <h6><span>Edad:</span> {{item.edad}} años </h6>
-                                            <h6><span>Hábitat:</span> {{item.habitat}}</h6>
-                                            <h6><span>Genero:</span> {{item.genero}}</h6>
-                                            <h6><span>Origen: </span>{{item.origen}}</h6>
-                                            <p>
-                                                    <span> Datos Curiosos:</span> {{item.observaciones}}
-                                            </p>
-                                        </div>
-                                    </div>
+                <div class="card border-0">
+                    <div class="card-body" class="animal">
+                        <h2 class="card-title">{{item.nombre}}</h2>
+                        <div class="imagen-animal">
+                            <img src="../../../assets/img/page-animales/fotos/{{item.imagen}}" class="card-img"
+                                alt="imagen-animal" >
+                                <div class="overlay" (click)="openDialog('../../../assets/img/page-animales/fotos/' + item.imagen)">
+                                   <span> Click para hacer zoom!</span>
                                 </div>
-                            </div>
-                        </mat-expansion-panel>
-                    </mat-accordion>                          
+                        </div>
+                        
+                        <div class="info-animal">
+                            <mat-card class="item-info-animal">
+                                <mat-card-content>
+                                    <h3>Especie</h3>
+                                    <span>{{item.especie}}</span>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="item-info-animal">
+                                <mat-card-content>
+                                    <h3>Edad</h3>
+                                    <span>{{item.edad}} años </span>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="item-info-animal">
+                                <mat-card-content>
+                                    <h3>Habitat</h3>
+                                    <span>{{item.habitat}}</span>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="item-info-animal">
+                                <mat-card-content>
+                                    <h3>Género</h3>
+                                    <span>{{item.genero}}</span>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="item-info-animal">
+                                <mat-card-content>
+                                    <h3>Origen</h3>
+                                    <span>{{item.origen}}</span>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <mat-card class="dato-curioso">
+                            <mat-card-content>
+                                <h3>Dato Curioso</h3>
+                                <p>
+                                    {{item.observaciones}}
+                                </p>
+                            </mat-card-content>
+                        </mat-card>
+
+
+                    </div>
                 </div>
-                <div id="flechas" class="card-footer p-0 bg-transparent border-0">
-                    <button class="btn btn-sm btn-return w-50 p-0" (click)="previousPage()" [disabled]=" paginaActual === 0">
-                        <mat-icon>arrow_back_ios</mat-icon>    
-                    </button>
-                    <button class="btn btn-sm btn-next w-50 p-0" (click)="nextPage()" [disabled]="paginaActual === totalPages - 1">
-                        <mat-icon>arrow_forward_ios</mat-icon>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>      
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+
+    <div id="flechas" class="card-footer p-0 bg-transparent border-0">
+        <button class="btn btn-sm btn-return w-50 p-0" (click)="previousPage()" [disabled]=" paginaActual === 0">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <button class="btn btn-sm btn-next w-50 p-0" (click)="nextPage()" [disabled]="paginaActual === totalPages - 1">
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+    </div>
 </div>
