@@ -14,7 +14,6 @@ export class LoginComponent {
   form: FormGroup;
   hide = true;
   nombreUser:String="";
-
   constructor (
     private toast: ToastService,
     private fb: FormBuilder,
@@ -26,6 +25,7 @@ export class LoginComponent {
       password: ['', Validators.required]
     })
   }
+
 
   ingresar(){
     if (this.form.value.usuario=="maximiliano" && this.form.value.password=="123") {
@@ -49,6 +49,7 @@ export class LoginComponent {
     }else{
       alert("Usuario o contraseña incorrecto")
     }
+    
 
   }
 }
