@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastService } from 'src/app/services/toast.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,6 +13,7 @@ import { ToastService } from 'src/app/services/toast.service';
 export class LoginComponent {
   form: FormGroup;
   hide = true;
+  nombreUser:String="";
 
   constructor (
     private toast: ToastService,
@@ -26,11 +28,22 @@ export class LoginComponent {
   }
 
   ingresar(){
-    if(this.form.invalid){
+    if (this.form.value.usuario=="maximiliano" && this.form.value.password=="123") {
+      alert("Inicio de sesion correcto")
+      this.router.navigate(['administrator'])
+      this.nombreUser=this.form.value.usuario;
+      this._loginService.nombreUsuario=this.nombreUser;
+    }else if (this.form.value.usuario=="odalis" && this.form.value.password=="123") {
+      alert("Inicio de sesion correcto")
+      this.router.navigate(['administrator'])
+      this.nombreUser=this.form.value.usuario;
+      this._loginService.nombreUsuario=this.nombreUser;
+    }else if(this.form.invalid){
       this.toast.error("Todos los campos son obligatorio","Error");
       return
+    }else{
+      alert("Usuario o contraseña incorrecto")
     }
 
-    this.router.navigate(['administrator'])
   }
 }
