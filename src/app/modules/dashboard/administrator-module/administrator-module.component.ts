@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import {  LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-administrator-module',
@@ -16,6 +17,6 @@ export class AdministratorModuleComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private _loginService: LoginService, private breakpointObserver: BreakpointObserver) {}
 
 }
