@@ -14,7 +14,6 @@ export class LoginComponent {
   form: FormGroup;
   hide = true;
   nombreUser:String="";
-
   constructor (
     private toast: ToastService,
     private fb: FormBuilder,
@@ -27,6 +26,7 @@ export class LoginComponent {
     })
   }
 
+
   ingresar(){
     if (this.form.value.usuario=="maximiliano" && this.form.value.password=="123") {
       alert("Inicio de sesion correcto")
@@ -38,12 +38,18 @@ export class LoginComponent {
       this.router.navigate(['administrator'])
       this.nombreUser=this.form.value.usuario;
       this._loginService.nombreUsuario=this.nombreUser;
+    }else if (this.form.value.usuario=="eduardo" && this.form.value.password=="123") {
+      alert("Inicio de sesion correcto")
+      this.router.navigate(['administrator'])
+      this.nombreUser=this.form.value.usuario;
+      this._loginService.nombreUsuario=this.nombreUser;
     }else if(this.form.invalid){
       this.toast.error("Todos los campos son obligatorio","Error");
       return
     }else{
       alert("Usuario o contraseña incorrecto")
     }
+    
 
   }
 }
