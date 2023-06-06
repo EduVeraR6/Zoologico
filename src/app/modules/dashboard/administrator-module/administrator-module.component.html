@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
 
         <mat-toolbar class="toolbar-logo d-flex justify-content-center">
             <img src="../../../../assets/img/Logo.png" class="rounded-3 shadow-sm">
@@ -19,8 +20,8 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <a mat-list-item class="nav-link" routerLink="">
-            ....
-          </a>
+                        ....
+                    </a>
                 </mat-expansion-panel>
 
                 <mat-expansion-panel>
@@ -52,8 +53,8 @@
                         </mat-panel-description>
                     </mat-expansion-panel-header>
                     <a mat-list-item class="nav-link" routerLink="">
-            ....
-          </a>
+                        ....
+                    </a>
                 </mat-expansion-panel>
 
             </mat-accordion>
@@ -64,22 +65,23 @@
 
     <mat-sidenav-content class="overflow-hidden shadow-sm">
         <mat-toolbar color="primary" class="ms-2 mt-2">
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
             <span>Zoo Municipal de Loja - Administrador</span>
 
             <div class="container">
                 <span>{{_loginService.nombreUsuario}}</span>
                 <button class="float-end" mat-icon-button [matMenuTriggerFor]="menu">
 
-          <mat-icon matTooltip="Opciones">more_vert</mat-icon>
-        </button>
+                    <mat-icon matTooltip="Opciones">more_vert</mat-icon>
+                </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item [routerLink]="['']">
-            <mat-icon>logout</mat-icon>
-            <span>Salir</span>
-          </button>
+                    <button mat-menu-item routerLink="/Login">
+                        <mat-icon>logout</mat-icon>
+                        <button mat-raised-button color="warn">Salir</button>
+                    </button>
                 </mat-menu>
             </div>
         </mat-toolbar>

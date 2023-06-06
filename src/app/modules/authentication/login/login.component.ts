@@ -29,17 +29,17 @@ export class LoginComponent {
 
   ingresar(){
     if (this.form.value.usuario=="maximiliano" && this.form.value.password=="123") {
-      alert("Inicio de sesion correcto")
+      this.toast.success("Bienvenido","Datos Correctos")
       this.router.navigate(['administrator'])
       this.nombreUser=this.form.value.usuario;
       this._loginService.nombreUsuario=this.nombreUser;
     }else if (this.form.value.usuario=="odalis" && this.form.value.password=="123") {
-      alert("Inicio de sesion correcto")
+      this.toast.success("Bienvenido","Datos Correctos")
       this.router.navigate(['administrator'])
       this.nombreUser=this.form.value.usuario;
       this._loginService.nombreUsuario=this.nombreUser;
     }else if (this.form.value.usuario=="eduardo" && this.form.value.password=="123") {
-      alert("Inicio de sesion correcto")
+      this.toast.success("Bienvenido","Datos Correctos")
       this.router.navigate(['administrator'])
       this.nombreUser=this.form.value.usuario;
       this._loginService.nombreUsuario=this.nombreUser;
@@ -47,7 +47,7 @@ export class LoginComponent {
       this.toast.error("Todos los campos son obligatorio","Error");
       return
     }else{
-      alert("Usuario o contraseña incorrecto")
+      this.toast.error("Datos Erroneos , Vuelva a Intentarlo","Error");
     }
     
 
