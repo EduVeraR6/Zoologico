@@ -12,7 +12,6 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
       width: 100%;
       height: auto;
       max-height: 80vh;
-      border-radius : 15px;
     }
     `
   ]

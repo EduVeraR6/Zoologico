@@ -115,6 +115,11 @@ mat-panel-title {
     text-align: center;
 }
 
+.dato-curioso h3{
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 25px;
+}
 .card-caja {
     background-size: cover;
 
