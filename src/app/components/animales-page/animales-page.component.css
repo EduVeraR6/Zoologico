@@ -1,7 +1,7 @@
 h2{
     margin-top: 40px;
     text-align: center;
-    color: #fff;
+    color: var(--green);
     font-weight: bold;
     font-size: 40px;
 }
@@ -24,9 +24,7 @@ p{
     gap: 100px;
     justify-content: center;
     align-items: center;
-    background-color: var(--green-2);
     padding-bottom: 30px;
-
 }
 
 .cabecera-lista-animales {
@@ -45,15 +43,15 @@ p{
 #imagen-fondo1{
     width: 300px;
     position: absolute;
-    top: 100vh;
+    top: 90vh;
     left: 150vh;
 }
 
 
 #imagen-fondo2{
-    width: 350px;
+    width: 250px;
     position: absolute;
-    top: 100vh;
+    top: 127vh;
     right: 140vh;
 }
 

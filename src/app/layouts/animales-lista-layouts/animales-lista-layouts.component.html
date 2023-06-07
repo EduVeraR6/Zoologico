@@ -1,61 +1,74 @@
 <div class="container-animales">
     <div class="card-body">
-        <h1>Información de cada Especie</h1>
-        <mat-accordion class="example-headers-align">
+        <div class="titulo">
+            <h1>Información de cada Especie</h1>
+        </div>
+        <mat-accordion class="example-headers-align" id="contendor-items">
             <mat-expansion-panel *ngFor="let item of paginasAnimales" [expanded]="item.expanded">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="text-capitalize">{{item.nombre}}</mat-panel-title>
                     <mat-panel-description>Especie: {{item.especie}}
-                        <img src="../../../assets/img/page-animales/zoologia.png" alt="icono">
+                        <div class="lupa">
+                            <span>Más Información</span>
+                            <img src="../../../assets/img/page-animales/zoologia.png" alt="icono">
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
                 <div class="card border-0">
                     <div class="card-body" class="animal">
                         <h2 class="card-title">{{item.nombre}}</h2>
+
                         <div class="imagen-animal">
                             <img src="../../../assets/img/page-animales/fotos/{{item.imagen}}" class="card-img"
-                                alt="imagen-animal" >
-                                <div class="overlay" (click)="openDialog('../../../assets/img/page-animales/fotos/' + item.imagen)">
-                                   <span><mat-icon>center_focus_weak</mat-icon></span>
-                                </div>
+                                alt="imagen-animal">
+                            <div class="overlay"
+                                (click)="openDialog('../../../assets/img/page-animales/fotos/' + item.imagen)">
+                                <span><mat-icon>center_focus_weak</mat-icon></span>
+                            </div>
                         </div>
-                        
+
                         <div class="info-animal">
                             <mat-card class="item-info-animal">
-                                <mat-card-content>
+                                <mat-card-content id="info-animal-container">
                                     <h3>Especie</h3>
+                                    <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="flecha">
                                     <span>{{item.especie}}</span>
                                 </mat-card-content>
                             </mat-card>
                             <mat-card class="item-info-animal">
-                                <mat-card-content>
+                                <mat-card-content id="info-animal-container">
                                     <h3>Edad</h3>
+                                    <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="">
                                     <span>{{item.edad}} años </span>
                                 </mat-card-content>
                             </mat-card>
                             <mat-card class="item-info-animal">
-                                <mat-card-content>
+                                <mat-card-content id="info-animal-container">
                                     <h3>Habitat</h3>
+                                    <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="">
                                     <span>{{item.habitat}}</span>
                                 </mat-card-content>
                             </mat-card>
                             <mat-card class="item-info-animal">
-                                <mat-card-content>
+                                <mat-card-content id="info-animal-container">
                                     <h3>Género</h3>
+                                    <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="">
                                     <span>{{item.genero}}</span>
                                 </mat-card-content>
                             </mat-card>
                             <mat-card class="item-info-animal">
-                                <mat-card-content>
+                                <mat-card-content id="info-animal-container">
                                     <h3>Origen</h3>
+                                    <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="">
                                     <span>{{item.origen}}</span>
                                 </mat-card-content>
                             </mat-card>
                         </div>
                         <mat-card class="dato-curioso">
-                            <mat-card-content>
+                            <mat-card-content id="info-animal-container">
                                 <h3>Dato Curioso</h3>
+                                <img class="img-flecha" src="../../../assets/img/page-animales/flecha.png" alt="">
                                 <p>
                                     {{item.observaciones}}
                                 </p>
