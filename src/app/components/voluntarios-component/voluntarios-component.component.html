@@ -1,12 +1,20 @@
 <app-nav-component></app-nav-component>
 
 
-<div class="voluntarios-container">
-    <h1>Información de Voluntarios</h1>
-    <div *ngFor="let voluntario of voluntarios" class="voluntario-card">
-        <h2>{{ voluntario.nombre }}</h2>
-        <p>{{ voluntario.edad }} años</p>
-        <p>{{ voluntario.descripcion }}</p>
+
+<div class="container">
+    <div class="person" *ngFor="let person of people">
+        <img [src]="person.photo" (click)="openModal(person)">
+        <h2>{{ person.name }}</h2>
+    </div>
+</div>
+
+<div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+        <h1>{{ selectedPerson.name }}</h1>
+        <img [src]="selectedPerson.photo">
+        <p>{{ selectedPerson.details }}</p>
+        <button (click)="closeModal()">Cerrar</button>
     </div>
 </div>
 
