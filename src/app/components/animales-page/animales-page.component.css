@@ -1,4 +1,4 @@
-h2{
+h2 {
     margin-top: 40px;
     text-align: center;
     color: var(--green);
@@ -6,17 +6,19 @@ h2{
     font-size: 40px;
 }
 
-mat-card{
+mat-card {
     margin-top: 30px;
     width: 50%;
     background-color: #efefef;
 }
-p{
+
+p {
     width: 100%;
     text-align: justify;
     color: black;
 }
-.lista-animales{
+
+.lista-animales {
     width: 100%;
     height: 100%;
     display: flex;
@@ -35,12 +37,11 @@ p{
     margin-top: 30px;
 }
 
-.img-lista-animales{
+.img-lista-animales {
     width: 100px;
-
 }
 
-#imagen-fondo1{
+#imagen-fondo1 {
     width: 300px;
     position: absolute;
     top: 90vh;
@@ -48,18 +49,21 @@ p{
 }
 
 
+
 #imagen-fondo2{
     width: 250px;
+}
+
+#imagen-fondo2 {
+    width: 350px;
     position: absolute;
     top: 127vh;
     right: 140vh;
 }
 
-app-animales-lista-layouts{
+app-animales-lista-layouts {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
-
