@@ -31,6 +31,10 @@ import { SettingActivitiesDeleteComponent } from './modules/dashboard/actitivida
 import { SettingActivitiesInfoComponent } from './modules/dashboard/actitividades-module/setting-activities-info/setting-activities-info.component';
 import { AnimalesListaLayoutsComponent } from './layouts/animales-lista-layouts/animales-lista-layouts.component';
 import { ListasVoluntariosComponent } from './layouts/listas-voluntarios/listas-voluntarios.component';
+import { SettingAnimalesDefaultComponent } from './modules/dashboard/animales-module/setting-animales-default/setting-animales-default.component';
+import { SettingAnimalesAddeditComponent } from './modules/dashboard/animales-module/setting-animales-addedit/setting-animales-addedit.component';
+import { SettingAnimalesDeleteComponent } from './modules/dashboard/animales-module/setting-animales-delete/setting-animales-delete.component';
+import { SettingAnimalesInfoComponent } from './modules/dashboard/animales-module/setting-animales-info/setting-animales-info.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { ListasVoluntariosComponent } from './layouts/listas-voluntarios/listas-
     SettingActivitiesDeleteComponent,
     SettingActivitiesInfoComponent,
     AnimalesListaLayoutsComponent,
-    ListasVoluntariosComponent
+    ListasVoluntariosComponent,
+    SettingAnimalesDefaultComponent,
+    SettingAnimalesAddeditComponent,
+    SettingAnimalesDeleteComponent,
+    SettingAnimalesInfoComponent
   ],
   imports: [
     BrowserModule,
