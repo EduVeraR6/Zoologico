@@ -13,6 +13,7 @@ import { AdministratorModuleComponent } from './modules/dashboard/administrator-
 import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitividades-module/setting-activities-default/setting-activities-default.component';
 import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividades-module/setting-activities-users/setting-activities-users.component';
 import { SettingAnimalesDefaultComponent } from './modules/dashboard/animales-module/setting-animales-default/setting-animales-default.component';
+import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-default/setting-voluntarios-default.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},
@@ -26,7 +27,8 @@ const routes: Routes = [
     children: [
       { path: 'default-activities',             component: SettingActivitiesDefaultComponent },
       { path: 'default-animales',             component: SettingAnimalesDefaultComponent},
-      { path: 'users-activities',               component: SettingActivitiesUsersComponent }
+      { path: 'users-activities',               component: SettingActivitiesUsersComponent },
+      { path: 'default-voluntarios',               component: SettingVoluntariosDefaultComponent }
     ]
   },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }

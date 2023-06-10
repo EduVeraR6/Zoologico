@@ -1,9 +1,11 @@
-<div class="container">
-    <div class="person" *ngFor="let person of people">
-        <img [src]="person.photo" (click)="openModal(person)">
-        <h2>{{ person.name }}</h2>
+<mat-card class="custom-card ">
+    <div class="container">
+        <div class="person" *ngFor="let person of people">
+            <img [src]="person.photo" (click)="openModal(person)">
+            <h2>{{ person.name }}</h2>
+        </div>
     </div>
-</div>
+</mat-card>
 
 <div class="modal" *ngIf="showModal">
     <div class="modal-content">
@@ -12,8 +14,6 @@
         <img [src]="selectedPerson.photo">
         <p>Edad: {{ selectedPerson.Edad }}</p>
         <p>Ocupacion: {{ selectedPerson.ocupacion }}</p>
-        <p>Motivacion: {{ selectedPerson.Motivacion }}</p>
-
         <button (click)="closeModal()">Cerrar</button>
     </div>
 </div>

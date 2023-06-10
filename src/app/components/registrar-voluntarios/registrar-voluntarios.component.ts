@@ -23,5 +23,5 @@ export class RegistrarVoluntariosComponent {
       telefono: new FormControl('', Validators.required),
       edad: new FormControl('', Validators.required),
     })
-  
+    
 }
