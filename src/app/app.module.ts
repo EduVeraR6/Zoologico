@@ -35,6 +35,10 @@ import { SettingAnimalesDefaultComponent } from './modules/dashboard/animales-mo
 import { SettingAnimalesAddeditComponent } from './modules/dashboard/animales-module/setting-animales-addedit/setting-animales-addedit.component';
 import { SettingAnimalesDeleteComponent } from './modules/dashboard/animales-module/setting-animales-delete/setting-animales-delete.component';
 import { SettingAnimalesInfoComponent } from './modules/dashboard/animales-module/setting-animales-info/setting-animales-info.component';
+import { SettingVoluntariosAddeditComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-addedit/setting-voluntarios-addedit.component';
+import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-default/setting-voluntarios-default.component';
+import { SettingVoluntariosDeleteComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-delete/setting-voluntarios-delete.component';
+import { SettingVoluntariosInfoComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-info/setting-voluntarios-info.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +68,11 @@ import { SettingAnimalesInfoComponent } from './modules/dashboard/animales-modul
     SettingAnimalesDefaultComponent,
     SettingAnimalesAddeditComponent,
     SettingAnimalesDeleteComponent,
-    SettingAnimalesInfoComponent
+    SettingAnimalesInfoComponent,
+    SettingVoluntariosAddeditComponent,
+    SettingVoluntariosDefaultComponent,
+    SettingVoluntariosDeleteComponent,
+    SettingVoluntariosInfoComponent
   ],
   imports: [
     BrowserModule,

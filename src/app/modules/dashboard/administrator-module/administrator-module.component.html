@@ -1,6 +1,5 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
 
         <mat-toolbar class="toolbar-logo d-flex justify-content-center">
             <img src="../../../../assets/img/Logo.png" class="rounded-3 shadow-sm">
@@ -57,8 +56,9 @@
                             <span class="text-dark">Voluntarios</span>
                         </mat-panel-description>
                     </mat-expansion-panel-header>
-                    <a mat-list-item class="nav-link" routerLink="">
-                        ....
+                    <a mat-list-item routerLink="/administrator/default-voluntarios">
+                        <mat-icon class="icon-items">settings</mat-icon>
+                        <span>Gestionar</span>
                     </a>
                 </mat-expansion-panel>
 
@@ -70,8 +70,7 @@
 
     <mat-sidenav-content class="overflow-hidden shadow-sm">
         <mat-toolbar color="primary" class="ms-2 mt-2">
-            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-                *ngIf="isHandset$ | async">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Zoo Municipal de Loja - Administrador</span>
