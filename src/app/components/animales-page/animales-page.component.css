@@ -26,7 +26,6 @@ p {
     gap: 100px;
     justify-content: center;
     align-items: center;
-    padding-bottom: 30px;
 }
 
 .cabecera-lista-animales {
@@ -35,6 +34,7 @@ p {
     justify-content: center;
     align-items: center;
     margin-top: 30px;
+
 }
 
 .img-lista-animales {
@@ -55,15 +55,51 @@ p {
 }
 
 #imagen-fondo2 {
-    width: 350px;
+    width: 250px;
     position: absolute;
-    top: 127vh;
-    right: 140vh;
+    top: 215vh;
+    right: 80vh;
 }
+
+
+.flecha-animales{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 100px;
+
+}
+
+.flecha-animales video{
+    width: 80vh;
+    border-radius: 5px;
+}
+
+.flecha-animales p{
+    padding: 20px;
+
+}
+
+.flecha-animales mat-card{
+    background-color: #c1e1b9;
+    border-radius: 15px;
+}
+
+#flecha{
+    position: absolute;
+    left: 100px;
+    transform: rotate(40deg);
+    width: 400px;
+    top: 190vh;
+}
+
+
 
 app-animales-lista-layouts {
     display: flex;
     flex-direction: column;
+    margin-top: 20vh;
+    margin-bottom: 30px;
     align-items: center;
     justify-content: center;
 }

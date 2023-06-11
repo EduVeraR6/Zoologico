@@ -41,6 +41,7 @@ export class SettingAnimalesDefaultComponent {
     return text;
   }
   
+  
   obtenerAnimales(){
     this.loading = true;
     this.dataSource.data = this._animalesService.getAnimales();
