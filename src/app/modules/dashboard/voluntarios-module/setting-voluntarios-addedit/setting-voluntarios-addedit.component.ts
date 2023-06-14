@@ -31,7 +31,6 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
       telefono: ['', Validators.required],
       experiencia: ['', Validators.required],
       motivacion: ['', Validators.required],
-      imagen: ['', Validators.required],
     })
   }
 
@@ -64,13 +63,13 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
 
     const voluntarios: IVoluntarios= {
       id_voluntarios: (this.data) ? this.data.id_voluntarios : this._voluntariosService.voluntarios.length + 1,
-      nombres: this.form.value.nombre,
-      apellidos: this.form.value.edad,
-      cedula: this.form.value.especie,
-      edad: this.form.value.genero,
-     telefono: this.form.value.origen,
-      experiencia: this.form.value.habitat,
-      motivacion: this.form.value.observaciones,
+      nombres: this.form.value.nombres,
+      apellidos: this.form.value.apellidos,
+      cedula: this.form.value.cedula,
+      edad: this.form.value.edad,
+     telefono: this.form.value.telefono,
+      experiencia: this.form.value.experiencia,
+      motivacion: this.form.value.motivacion,
       imagen: this.fileName.name,
       estado: true
     }
