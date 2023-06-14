@@ -7,6 +7,7 @@ import {NgIf} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-registrar-voluntarios',
@@ -14,6 +15,9 @@ import {MatSelectModule} from '@angular/material/select';
   styleUrls: ['./registrar-voluntarios.component.css']
 })
 export class RegistrarVoluntariosComponent {
+  constructor(
+    private toast: ToastService
+  ){}
   alert: boolean=false;
     emailFormControl = new FormControl('', [Validators.required, Validators.email]);
     
@@ -23,5 +27,10 @@ export class RegistrarVoluntariosComponent {
       telefono: new FormControl('', Validators.required),
       edad: new FormControl('', Validators.required),
     })
-    
+    accion() {
+      if (this.voluntariosNuevos.invalid) {
+        this.toast.error("Campos vacíos", "Error")
+        return
+      }
+    }
 }
