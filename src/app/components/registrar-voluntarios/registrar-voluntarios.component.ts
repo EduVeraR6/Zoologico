@@ -24,8 +24,11 @@ export class RegistrarVoluntariosComponent {
     voluntariosNuevos = new FormGroup({
       nombres: new FormControl('', Validators.required),
       apellidos: new FormControl('', Validators.required),
-      telefono: new FormControl('', Validators.required),
+      cedula: new FormControl('', Validators.required),
       edad: new FormControl('', Validators.required),
+      telefono: new FormControl('', Validators.required),
+      experiencia: new FormControl('', Validators.required),
+      motivacion: new FormControl('', Validators.required)
     })
     accion() {
       if (this.voluntariosNuevos.invalid) {

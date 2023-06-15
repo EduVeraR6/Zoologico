@@ -61,33 +61,33 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
       return
     }
 
-    const voluntarios: IVoluntarios= {
-      id_voluntarios: (this.data) ? this.data.id_voluntarios : this._voluntariosService.voluntarios.length + 1,
-      nombres: this.form.value.nombres,
-      apellidos: this.form.value.apellidos,
-      cedula: this.form.value.cedula,
-      edad: this.form.value.edad,
-     telefono: this.form.value.telefono,
-      experiencia: this.form.value.experiencia,
-      motivacion: this.form.value.motivacion,
-      imagen: this.fileName.name,
-      estado: true
+    const volunta: IVoluntarios= {
+      
+      id_voluntarios:       (this.data) ? this.data.id_voluntarios : this._voluntariosService.voluntarios.length+1,
+      nombres:              this.form.value.nombres,
+      apellidos:            this.form.value.apellidos,
+      cedula:               this.form.value.cedula,
+      edad:                 this.form.value.edad,
+      telefono:             this.form.value.telefono,
+      experiencia:          this.form.value.experiencia,
+      motivacion:           this.form.value.motivacion,
+      imagen:               this.form.value.imagen,
+      estado:               true
     }
 
-    if (this.data) {
-      this._voluntariosService.updateVoluntarios(voluntarios)
+    if(this.data){
+      this._voluntariosService.updateVoluntarios(volunta)
       this.dialogRef.close("actualizado")
       return
     }
 
-    if (!this.data) {
-      this._voluntariosService.addVoluntarios(voluntarios)
+    if(!this.data){
+      this._voluntariosService.addVoluntarios(volunta)
       this.dialogRef.close("agregado")
       return
     }
-
-    this.toast.error("A ocurrido un error", "Lo sentimos")
+    
+    this.toast.error("A ocurrido un error","Lo sentimos")
   }
-
 }
 
