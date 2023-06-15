@@ -39,6 +39,7 @@ import { SettingVoluntariosAddeditComponent } from './modules/dashboard/voluntar
 import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-default/setting-voluntarios-default.component';
 import { SettingVoluntariosDeleteComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-delete/setting-voluntarios-delete.component';
 import { SettingVoluntariosInfoComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-info/setting-voluntarios-info.component';
+import { CarouselVoluntariosPageComponent } from './layouts/carousel-voluntarios-page/carousel-voluntarios-page.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { SettingVoluntariosInfoComponent } from './modules/dashboard/voluntarios
     SettingVoluntariosAddeditComponent,
     SettingVoluntariosDefaultComponent,
     SettingVoluntariosDeleteComponent,
-    SettingVoluntariosInfoComponent
+    SettingVoluntariosInfoComponent,
+    CarouselVoluntariosPageComponent
   ],
   imports: [
     BrowserModule,
