@@ -3,11 +3,12 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
-import {NgIf} from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ToastService } from 'src/app/services/toast.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-registrar-voluntarios',
@@ -16,7 +17,10 @@ import { ToastService } from 'src/app/services/toast.service';
 })
 export class RegistrarVoluntariosComponent {
   constructor(
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router,
+    private dialog:MatDialog
+
   ){}
   alert: boolean=false;
     emailFormControl = new FormControl('', [Validators.required, Validators.email]);
@@ -32,8 +36,12 @@ export class RegistrarVoluntariosComponent {
     })
     accion() {
       if (this.voluntariosNuevos.invalid) {
-        this.toast.error("Campos vacíos", "Error")
+        this.toast.error("Campos vacíos", "Error");
         return
+      }else{
+        this.toast.success("Solicitud enviada con exito", "Success");
+        this.router.navigate(['/Voluntarios']);
+        this.dialog.closeAll();
       }
     }
 }

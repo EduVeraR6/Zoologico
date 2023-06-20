@@ -17,16 +17,24 @@
                     </mat-form-field>
                 </div>
                 <div class="col">
+                    <div class="input-group p-0">
+                        <label class="input-group-text p-1" for="inputGroupFile01">
+                            <mat-icon class="icon-file" matPrefix>upload_file</mat-icon>
+                        </label>
+                        <input type="file" class="form-control" id="inputGroupFile01" formControlName="imagen" (change)="onFileSelected($event)">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row row-cols-2">
+                <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Apellidos :</mat-label>
                         <input type="text" matInput autocomplete="off" formControlName="apellidos">
                         <mat-icon matPrefix>person</mat-icon>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row row-cols-2">
-
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Cedula : </mat-label>
@@ -34,6 +42,10 @@
                         <mat-icon matPrefix>person</mat-icon>
                     </mat-form-field>
                 </div>
+
+            </div>
+
+            <div class="row row-cols-2">
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Edad: </mat-label>
@@ -41,10 +53,6 @@
                         <mat-icon matPrefix>person</mat-icon>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row row-cols-2">
-
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Telefono : </mat-label>
@@ -52,6 +60,10 @@
                         <mat-icon matPrefix>phone</mat-icon>
                     </mat-form-field>
                 </div>
+
+            </div>
+
+            <div class="row row-cols-2">
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Experiencia :</mat-label>
@@ -59,9 +71,6 @@
                         <mat-icon matPrefix>description</mat-icon>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row row-cols-2">
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> motivacion :</mat-label>
@@ -69,12 +78,16 @@
                         <mat-icon matPrefix>description</mat-icon>
                     </mat-form-field>
                 </div>
+            </div>
+            <div class="row row-cols-2">
                 <div class="col">
                     <div class="row my-2 mt-0 btn-actions">
                         <button class="btn btn-danger btn-sm" mat-dialog-close>
                             <mat-icon> arrow_back_ios </mat-icon>
                         </button>
                     </div>
+                </div>
+                <div class="col">
                     <div class="row btn-actions">
                         <button class="btn btn-success btn-sm btn-send" type="submit">
                             <mat-icon>{{iconName}}</mat-icon>
