@@ -142,12 +142,12 @@ mat-panel-title {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--orange);
+    background-color:#ffc71b;
     text-align: center;
 }
 
 .dato-curioso h3{
-    color: #f5f5f5;
+    color: var(--brown);
     font-size: 25px;
 }
 
