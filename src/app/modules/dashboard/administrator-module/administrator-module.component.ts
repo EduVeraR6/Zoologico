@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { LoginService } from 'src/app/services/login.service';
-import { ToastService } from 'src/app/services/toast.service';
-
+import { IUsuario } from 'src/app/interfaces/iusuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrator-module',
@@ -12,6 +11,7 @@ import { ToastService } from 'src/app/services/toast.service';
   styleUrls: ['./administrator-module.component.css']
 })
 export class AdministratorModuleComponent {
+  usuarioLogeado!: IUsuario ;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,6 +19,11 @@ export class AdministratorModuleComponent {
       shareReplay()
     );
 
-  constructor(public _loginService: LoginService, private breakpointObserver: BreakpointObserver) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+    ) {
+       this.usuarioLogeado = this.router.getCurrentNavigation()?.extras.state?.['data'] 
+    }
 
 }

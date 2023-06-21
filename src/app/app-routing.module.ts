@@ -11,9 +11,9 @@ import { AnimalesPageComponent } from './components/animales-page/animales-page.
 import { VoluntariosComponentComponent } from './components/voluntarios-component/voluntarios-component.component';
 import { AdministratorModuleComponent } from './modules/dashboard/administrator-module/administrator-module.component';
 import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitividades-module/setting-activities-default/setting-activities-default.component';
-import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividades-module/setting-activities-users/setting-activities-users.component';
 import { SettingAnimalesDefaultComponent } from './modules/dashboard/animales-module/setting-animales-default/setting-animales-default.component';
 import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-default/setting-voluntarios-default.component';
+import { SettingPersonalizadoDefaultComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-default/setting-personalizado-default.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},
@@ -27,7 +27,7 @@ const routes: Routes = [
     children: [
       { path: 'default-activities',             component: SettingActivitiesDefaultComponent },
       { path: 'default-animales',             component: SettingAnimalesDefaultComponent},
-      { path: 'users-activities',               component: SettingActivitiesUsersComponent },
+      { path: 'users-activities',               component: SettingPersonalizadoDefaultComponent },
       { path: 'default-voluntarios',               component: SettingVoluntariosDefaultComponent }
     ]
   },

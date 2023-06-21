@@ -28,8 +28,6 @@
     padding-top: .2rem;
 }
 
-
-
 ::ng-deep .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
     color: var(--brown);
     border: 2px;
@@ -40,4 +38,9 @@
 ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__leading,
 ::ng-deep .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__trailing {
     border-color: var(--green);
+}
+
+.btn-sm mat-icon{
+    font-size: larger;
+    padding-top: .3rem;
 }

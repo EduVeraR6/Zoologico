@@ -1,27 +1,27 @@
-import { SettingActivitiesAddeditComponent } from './../setting-activities-addedit/setting-activities-addedit.component';
+import { SettingPersonalizadoDeleteComponent } from './../setting-personalizado-delete/setting-personalizado-delete.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { IActividad } from 'src/app/interfaces/iactividad';
-import { ActividadServiceService } from 'src/app/services/actividad-service.service';
+import { IPersonalizado } from 'src/app/interfaces/iactividad';
+import { ActividadPersonalizadaServicesService } from 'src/app/services/actividad-personalizada-services.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { SettingActivitiesInfoComponent } from '../setting-activities-info/setting-activities-info.component';
-import { SettingActivitiesDeleteComponent } from '../setting-activities-delete/setting-activities-delete.component';
+import { SettingPersonalizadoEditComponent } from '../setting-personalizado-edit/setting-personalizado-edit.component';
+import { SettingPersonalizadoInfoComponent } from '../setting-personalizado-info/setting-personalizado-info.component';
 
 @Component({
-  selector: 'app-setting-activities-default',
-  templateUrl: './setting-activities-default.component.html',
-  styleUrls: ['./setting-activities-default.component.css']
+  selector: 'app-setting-personalizado-default',
+  templateUrl: './setting-personalizado-default.component.html',
+  styleUrls: ['./setting-personalizado-default.component.css']
 })
-export class SettingActivitiesDefaultComponent implements OnInit{
-  displayedColumns: string[] = ['nombre', 'cantidadPersonas', 'precio', 'hora', 'time', 'estado','accion'];
-  dataSource = new MatTableDataSource<IActividad>();
+export class SettingPersonalizadoDefaultComponent implements OnInit{
+  displayedColumns: string[] = ['nombreUsuario', 'cantidadPersonas', 'hora', 'fecha','estado','accion'];
+  dataSource = new MatTableDataSource<IPersonalizado>();
   loading: boolean = false;  
 
   constructor(
-    private _actividadService: ActividadServiceService,
+    private _actividadService: ActividadPersonalizadaServicesService,
     public dialog: MatDialog,
     private toast: ToastService
   ) { }
@@ -55,28 +55,11 @@ export class SettingActivitiesDefaultComponent implements OnInit{
     }
   } 
 
-  openAdd(){
-    this.dialog.open(SettingActivitiesAddeditComponent,{
+  openEdit(actividadData: IPersonalizado){
+     this.dialog.open(SettingPersonalizadoEditComponent,{
       autoFocus: false,
       disableClose: true,
-      width: '50%',
-      height: '500px'
-    }).afterClosed().subscribe(
-      (data) => {
-        if(data == "agregado"){
-          this.obtenerActividades();
-          this.toast.success("Agregado exitosamente","Enhorabuena")
-          return
-        }
-      }
-    )
-  }
-
-  openEdit(actividadData: IActividad){
-    this.dialog.open(SettingActivitiesAddeditComponent,{
-      autoFocus: false,
-      disableClose: true,
-      width: '50%',
+      width: 'auto',
       data: actividadData
     }).afterClosed().subscribe(
       (data) => {
@@ -89,8 +72,8 @@ export class SettingActivitiesDefaultComponent implements OnInit{
     )
   }
 
-  openDelete(actividadData: IActividad){
-    this.dialog.open(SettingActivitiesDeleteComponent,{
+  openDelete(actividadData: IPersonalizado){
+     this.dialog.open(SettingPersonalizadoDeleteComponent,{
       width: '20%',
       data: actividadData
     }).afterClosed().subscribe(
@@ -101,14 +84,14 @@ export class SettingActivitiesDefaultComponent implements OnInit{
           return
         }
       }
-    )
+    ) 
   }
 
-  openInfo(actividadData: IActividad){
-    this.dialog.open(SettingActivitiesInfoComponent,{
-      width: '50%',
+  openInfo(actividadData: IPersonalizado){
+     this.dialog.open(SettingPersonalizadoInfoComponent,{
+      width: 'auto',
       data: actividadData      
-    })
+     }) 
   }
   
 }

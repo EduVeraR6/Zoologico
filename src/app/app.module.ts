@@ -25,7 +25,6 @@ import { NosotrosComponentComponent } from './components/nosotros-component/noso
 import { AnimalesPageComponent } from './components/animales-page/animales-page.component';
 import { CarouselAnimalesPageComponent } from './layouts/carousel-animales-page/carousel-animales-page.component';
 import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitividades-module/setting-activities-default/setting-activities-default.component';
-import { SettingActivitiesUsersComponent } from './modules/dashboard/actitividades-module/setting-activities-users/setting-activities-users.component';
 import { SettingActivitiesAddeditComponent } from './modules/dashboard/actitividades-module/setting-activities-addedit/setting-activities-addedit.component';
 import { SettingActivitiesDeleteComponent } from './modules/dashboard/actitividades-module/setting-activities-delete/setting-activities-delete.component';
 import { SettingActivitiesInfoComponent } from './modules/dashboard/actitividades-module/setting-activities-info/setting-activities-info.component';
@@ -40,6 +39,10 @@ import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntar
 import { SettingVoluntariosDeleteComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-delete/setting-voluntarios-delete.component';
 import { SettingVoluntariosInfoComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-info/setting-voluntarios-info.component';
 import { CarouselVoluntariosPageComponent } from './layouts/carousel-voluntarios-page/carousel-voluntarios-page.component';
+import { SettingPersonalizadoDefaultComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-default/setting-personalizado-default.component';
+import { SettingPersonalizadoDeleteComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-delete/setting-personalizado-delete.component';
+import { SettingPersonalizadoEditComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-edit/setting-personalizado-edit.component';
+import { SettingPersonalizadoInfoComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-info/setting-personalizado-info.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,6 @@ import { CarouselVoluntariosPageComponent } from './layouts/carousel-voluntarios
     NosotrosComponentComponent,
     AnimalesPageComponent,
     CarouselAnimalesPageComponent,
-    SettingActivitiesUsersComponent,
     SettingActivitiesDefaultComponent,
     SettingActivitiesAddeditComponent,
     SettingActivitiesDeleteComponent,
@@ -74,7 +76,11 @@ import { CarouselVoluntariosPageComponent } from './layouts/carousel-voluntarios
     SettingVoluntariosDefaultComponent,
     SettingVoluntariosDeleteComponent,
     SettingVoluntariosInfoComponent,
-    CarouselVoluntariosPageComponent
+    CarouselVoluntariosPageComponent,
+    SettingPersonalizadoDefaultComponent,
+    SettingPersonalizadoDeleteComponent,
+    SettingPersonalizadoEditComponent,
+    SettingPersonalizadoInfoComponent
   ],
   imports: [
     BrowserModule,

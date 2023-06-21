@@ -13,14 +13,15 @@ export interface IActividad {
     expanded?:          boolean; 
 }
 
-export interface IUsuario {
-    id_usuario:         number,
+export interface IPersonalizado {
+    id_personalizado:   number,
     nombreUsuario:      string,
     telefono:           number,
     cantidadPersonas:   number,
     cantidadGuias:      number,
     precio:             number,
     hora:               string,
+    fecha:              Date,
     descripcion:        string,
     estado:             boolean
 }

@@ -11,8 +11,5 @@ export class SettingActivitiesInfoComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IActividad
-  ) {
-    console.log(data.imagen);
-    
-  }
+  ) { }
 }

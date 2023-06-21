@@ -1,23 +1,24 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPersonalizado } from 'src/app/interfaces/iactividad';
 import { ActividadPersonalizadaServicesService } from 'src/app/services/actividad-personalizada-services.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
-  selector: 'app-actividades-page',
-  templateUrl: './actividades-page.component.html',
-  styleUrls: ['./actividades-page.component.css']
+  selector: 'app-setting-personalizado-edit',
+  templateUrl: './setting-personalizado-edit.component.html',
+  styleUrls: ['./setting-personalizado-edit.component.css']
 })
-export class ActividadesPageComponent {
+export class SettingPersonalizadoEditComponent implements OnInit {
   form: FormGroup;  
 
   constructor(
     private fb: FormBuilder,
     private _toastServices: ToastService,
     private _actividadesServices: ActividadPersonalizadaServicesService,
-    private router: Router
+    private dialogRef: MatDialogRef<SettingPersonalizadoEditComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IPersonalizado,
   ) {
     this.form = this.fb.group({
       nombreUsuario:        ['', Validators.required],
@@ -29,6 +30,20 @@ export class ActividadesPageComponent {
       descripcion:          ['', Validators.required],
     })
   }
+
+  ngOnInit(): void {
+    if(this.data){
+      this.form.patchValue({
+        nombreUsuario:              this.data.nombreUsuario,
+        telefono:                   this.data.telefono,
+        cantidadPersonas:           this.data.cantidadPersonas,
+        cantidadGuias:              this.data.cantidadGuias,
+        hora:                       this.data.hora,
+        fecha:                      this.data.fecha,
+        descripcion:                this.data.descripcion
+      })
+    }
+  }  
 
   enviar(){
     if(this.form.invalid){
@@ -43,9 +58,9 @@ export class ActividadesPageComponent {
     }
 
     const precio = this.form.value.cantidadPersonas * 15;
-
+    
     const actividad: IPersonalizado = {
-      id_personalizado:     this._actividadesServices.actividades.length+1,
+      id_personalizado:     this.data.id_personalizado,
       nombreUsuario:        this.form.value.nombreUsuario,
       telefono:             this.form.value.telefono,
       cantidadPersonas:     this.form.value.cantidadPersonas,
@@ -56,9 +71,10 @@ export class ActividadesPageComponent {
       estado:               true,
       precio:               precio
     }
-    this._actividadesServices.addActividad(actividad);
-    this.router.navigate([''])
-    this._toastServices.info(`Tu valor a cancelar es $${precio}`, "Enhorabuena");
+        
+    this._actividadesServices.updateActividad(actividad);
+    
+    this.dialogRef.close("actualizado")
 
   }
 }

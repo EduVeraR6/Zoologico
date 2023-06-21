@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IUsuario } from 'src/app/interfaces/iusuario';
 import { LoginService } from 'src/app/services/login.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -13,7 +14,9 @@ import { ToastService } from 'src/app/services/toast.service';
 export class LoginComponent {
   form: FormGroup;
   hide = true;
-  nombreUser:String="";
+  usuarioLogeado!: IUsuario;
+
+
   constructor (
     private toast: ToastService,
     private fb: FormBuilder,
@@ -28,28 +31,34 @@ export class LoginComponent {
 
 
   ingresar(){
-    if (this.form.value.usuario=="maximiliano" && this.form.value.password=="123") {
-      this.toast.success("Bienvenido","Datos Correctos")
-      this.router.navigate(['administrator'])
-      this.nombreUser=this.form.value.usuario;
-      this._loginService.nombreUsuario=this.nombreUser;
-    }else if (this.form.value.usuario=="odalis" && this.form.value.password=="123") {
-      this.toast.success("Bienvenido","Datos Correctos")
-      this.router.navigate(['administrator'])
-      this.nombreUser=this.form.value.usuario;
-      this._loginService.nombreUsuario=this.nombreUser;
-    }else if (this.form.value.usuario=="eduardo" && this.form.value.password=="123") {
-      this.toast.success("Bienvenido","Datos Correctos")
-      this.router.navigate(['administrator'])
-      this.nombreUser=this.form.value.usuario;
-      this._loginService.nombreUsuario=this.nombreUser;
-    }else if(this.form.invalid){
-      this.toast.error("Todos los campos son obligatorio","Error");
+    if(this.form.invalid){
+      this.toast.error("Campos vacíos","Error");
       return
-    }else{
-      this.toast.error("Datos Erroneos , Vuelva a Intentarlo","Error");
     }
     
+    const usuario: IUsuario ={
+      user:       this.form.value.usuario,
+      password:   this.form.value.password
+    }
 
+    if(!this._loginService.verificarUser(usuario.user)){
+      this.toast.error("Usuarios ingresado no éxiste","Lo sentimos");
+      return
+    }
+
+    if(!this._loginService.verificarPass(usuario.password)){
+      this.toast.warning("Contraseña invalida","Intente de nuevo");
+      return
+    }
+
+    if(this._loginService.verificacionFinal(usuario.user, usuario.password)){
+      this.usuarioLogeado = this._loginService.verificacionFinal(usuario.user, usuario.password)
+      this.router.navigate(['/administrator'],{
+        state:{
+          data: this.usuarioLogeado
+        }
+      })
+      this.toast.success("Bienvenido "+this.usuarioLogeado.user,"Enhorabuena")
+    }
   }
 }
