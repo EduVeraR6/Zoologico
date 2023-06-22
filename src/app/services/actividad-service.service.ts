@@ -62,7 +62,7 @@ export class ActividadServiceService {
   ];
 
   getActividades(){
-    return this.actividades
+    return this.actividades.filter(e => e.estado === true)
   }
 
   addActividad(actividadNew: IActividad){
