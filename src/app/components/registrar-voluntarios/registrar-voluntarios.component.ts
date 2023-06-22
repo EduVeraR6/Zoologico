@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 import { NavigationExtras, Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -9,6 +9,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { ToastService } from 'src/app/services/toast.service';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ISolicitudV } from 'src/app/interfaces/ivoluntarios';
+import { SolicitudVolunServicesService } from 'src/app/services/solicitud-volun-services.service';
 
 @Component({
   selector: 'app-registrar-voluntarios',
@@ -16,24 +18,26 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrls: ['./registrar-voluntarios.component.css']
 })
 export class RegistrarVoluntariosComponent {
+  voluntariosNuevos: FormGroup;
   constructor(
     private toast: ToastService,
-    private router: Router,
-    private dialog:MatDialog
+    private dialog:MatDialog,
+    private _soliService: SolicitudVolunServicesService,
+    private fb: FormBuilder,
+    private router: Router
 
-  ){}
-  alert: boolean=false;
-    emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  ){ this.voluntariosNuevos = this.fb.group({
+    nombres:                 ['', Validators.required],
+    apellidos:               ['', Validators.required],
+    cedula:                  ['', Validators.required],
+    edad:                    ['', Validators.required],
+    telefono:                ['', Validators.required],
+    experiencia:             ['', Validators.required],
+    motivacion:            ['', Validators.required],
+  })}
+
     
-    voluntariosNuevos = new FormGroup({
-      nombres: new FormControl('', Validators.required),
-      apellidos: new FormControl('', Validators.required),
-      cedula: new FormControl('', Validators.required),
-      edad: new FormControl('', Validators.required),
-      telefono: new FormControl('', Validators.required),
-      experiencia: new FormControl('', Validators.required),
-      motivacion: new FormControl('', Validators.required)
-    })
+    
     accion() {
       if (this.voluntariosNuevos.invalid) {
         this.toast.error("Campos vacíos", "Error");
@@ -43,5 +47,17 @@ export class RegistrarVoluntariosComponent {
         this.router.navigate(['/Voluntarios']);
         this.dialog.closeAll();
       }
+      const solicitud: ISolicitudV = {
+        id_solicitud:     this._soliService.solicitudes.length+1,
+        nombres:        this.voluntariosNuevos.value.nombres,
+        apellidos:             this.voluntariosNuevos.value.apellidos,
+        cedula:     this.voluntariosNuevos.value.cedula,
+        edad:        this.voluntariosNuevos.value.edad,
+        telefono:                 this.voluntariosNuevos.value.telefono,
+        experiencia:                this.voluntariosNuevos.value.experiencia,
+        motivacion:          this.voluntariosNuevos.value.motivacion,
+        estado:               true
+      }
+      this._soliService.addActividad(solicitud);
     }
 }

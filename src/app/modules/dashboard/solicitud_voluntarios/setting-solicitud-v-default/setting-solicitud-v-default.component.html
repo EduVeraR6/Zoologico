@@ -1,0 +1,87 @@
+<div class="container-fluid w-auto d-flex justify-content-center align-items-start p-3 shadow m-4 rounded-4 bg-white">
+    <div class="container w-100">
+        <div class="w-100 text-center card border-0 shadow-sm mb-3">
+            <span class="h3 title w-100">Gestionar Solicitud de Voluntarios</span>
+        </div>
+        <div class="card-content">
+            <div class="row row-cols-1">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Filtro</mat-label>
+                        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input autocomplete="off">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="container-table">
+                <table mat-table [dataSource]="dataSource" matSort>
+
+                    <ng-container matColumnDef="nombres">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> Nombres </th>
+                        <td mat-cell *matCellDef="let row"> {{row.nombres}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="apellidos">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> Apellidos </th>
+                        <td mat-cell *matCellDef="let row"> {{row.apellidos}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cedula">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> Cedula </th>
+                        <td mat-cell *matCellDef="let row"> {{row.cedula}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edad">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Edad </th>
+                        <td mat-cell *matCellDef="let row"> {{row.edad}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> telefono </th>
+                        <td mat-cell *matCellDef="let row"> {{row.telefono}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="experiencia">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> experiencia </th>
+                        <td mat-cell *matCellDef="let row"> {{row.experiencia}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="motivacion">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="w-25"> motivacion </th>
+                        <td mat-cell *matCellDef="let row"> {{row.motivacion}} </td>
+                    </ng-container>
+
+
+
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                        <td mat-cell *matCellDef="let row">
+                            <span *ngIf="row.estado == true" class="badge text-bg-success rounded-pill d-inline fw-normal px-2 py-2">Esperando</span>
+                            <span *ngIf="row.estado == false" class="badge text-bg-danger rounded-pill d-inline fw-normal px-2 py-2">Finalizado</span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="accion">
+                        <th mat-header-cell *matHeaderCellDef class="text-center"> Acción </th>
+                        <td mat-cell *matCellDef="let row">
+                            <div class="container d-flex justify-content-evenly p-0">
+                                <button class="btn btn-accion btn-outline-primary" (click)="openInfo(row)">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                                <button *ngIf="row.estado == true" class="btn btn-outline-success btn-accion" (click)="openEdit(row)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                                <button *ngIf="row.estado == true" class="btn btn-outline-danger btn-accion" (click)="openDelete(row)">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <tr class="mat-row" *matNoDataRow>
+                        <td class="mat-cell" colspan="4">No hay datos que coincidan con el filtro "{{input.value}}"</td>
+                    </tr>
+                </table>
+
+                <mat-paginator [pageSizeOptions]="[4]"></mat-paginator>
+            </div>
+        </div>
+    </div>
+</div>
