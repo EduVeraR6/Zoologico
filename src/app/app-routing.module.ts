@@ -14,6 +14,7 @@ import { SettingActivitiesDefaultComponent } from './modules/dashboard/actitivid
 import { SettingAnimalesDefaultComponent } from './modules/dashboard/animales-module/setting-animales-default/setting-animales-default.component';
 import { SettingVoluntariosDefaultComponent } from './modules/dashboard/voluntarios-module/setting-voluntarios-default/setting-voluntarios-default.component';
 import { SettingPersonalizadoDefaultComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-default/setting-personalizado-default.component';
+import { SettingSolicitudVDefaultComponent } from './modules/dashboard/solicitud_voluntarios/setting-solicitud-v-default/setting-solicitud-v-default.component';
 
 const routes: Routes = [
   { path: '',                 redirectTo: 'home', pathMatch: 'full'},

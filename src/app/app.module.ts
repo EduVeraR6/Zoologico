@@ -45,6 +45,10 @@ import { SettingPersonalizadoEditComponent } from './modules/dashboard/actividad
 import { SettingPersonalizadoInfoComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-info/setting-personalizado-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from './shared/spinner.component';
+import { SettingSolicitudVDefaultComponent } from './modules/dashboard/solicitud_voluntarios/setting-solicitud-v-default/setting-solicitud-v-default.component';
+import { SettingSolicitudVDeleteComponent } from './modules/dashboard/solicitud_voluntarios/setting-solicitud-v-delete/setting-solicitud-v-delete.component';
+import { SettingSolicitudVEditComponent } from './modules/dashboard/solicitud_voluntarios/setting-solicitud-v-edit/setting-solicitud-v-edit.component';
+import { SettingSolicitudVInfoComponent } from './modules/dashboard/solicitud_voluntarios/setting-solicitud-v-info/setting-solicitud-v-info.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +87,11 @@ import { SpinnerComponent } from './shared/spinner.component';
     SettingPersonalizadoDeleteComponent,
     SettingPersonalizadoEditComponent,
     SettingPersonalizadoInfoComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    SettingSolicitudVDefaultComponent,
+    SettingSolicitudVDeleteComponent,
+    SettingSolicitudVEditComponent,
+    SettingSolicitudVInfoComponent
   ],
   imports: [
     BrowserModule,
