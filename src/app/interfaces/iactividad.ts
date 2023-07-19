@@ -1,27 +1,29 @@
+import { IHorario } from "./ihorario";
+
+export interface IActividadInformacion{
+    id_ActividadInformacion?:   number,
+    horario?:                   IHorario,
+    cantidadPersonas?:          number,
+    cantidadGuias?:             number,
+    precio?:                    number,
+    descripcion?:               string
+}
 
 export interface IActividad {
-    id_actividad:       number,
-    nombre:             string,
-    cantidadPersonas:   number,
-    cantidadGuias:      number,
-    precio:             number,
-    descripcion:        string,
-    hora:               string,
-    time:               string,
-    imagen:             string,
-    estado:             boolean
-    expanded?:          boolean; 
+    actividadInformacion:       IActividadInformacion,
+    nombre?:                    string,
+    tiempo?:                    string,
+    imagen?:                    string,
+    estado?:                    boolean,
+    transaccion?:               string,
+    expanded?:                  boolean;     
 }
 
 export interface IPersonalizado {
-    id_personalizado:   number,
-    nombreUsuario:      string,
-    telefono:           number,
-    cantidadPersonas:   number,
-    cantidadGuias:      number,
-    precio:             number,
-    hora:               string,
-    fecha:              Date,
-    descripcion:        string,
-    estado:             boolean
+    actividadInformacion:       IActividadInformacion,
+    nombreUsuario?:             string,
+    telefono?:                  number,
+    fecha?:                     Date,
+    estado?:                    boolean,
+    transaccion:                string
 }

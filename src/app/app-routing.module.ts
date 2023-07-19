@@ -25,10 +25,11 @@ const routes: Routes = [
   { path: 'Voluntarios',      component: VoluntariosComponentComponent },
   { path: 'administrator',    component:  AdministratorModuleComponent,
     children: [
-      { path: 'default-activities',             component: SettingActivitiesDefaultComponent },
+      { path: '',                             redirectTo: 'default-animales', pathMatch: 'full'},      
+      { path: 'default-activities',           component: SettingActivitiesDefaultComponent },
       { path: 'default-animales',             component: SettingAnimalesDefaultComponent},
-      { path: 'users-activities',               component: SettingPersonalizadoDefaultComponent },
-      { path: 'default-voluntarios',               component: SettingVoluntariosDefaultComponent }
+      { path: 'users-activities',             component: SettingPersonalizadoDefaultComponent },
+      { path: 'default-voluntarios',          component: SettingVoluntariosDefaultComponent }
     ]
   },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }

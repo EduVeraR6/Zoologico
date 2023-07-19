@@ -52,16 +52,9 @@
                 <div class="col">
                     <mat-form-field appearance="outline">
                         <mat-label> Hora </mat-label>
-                        <mat-select formControlName="hora" >
-                            <mat-option [value]="'09:00 A.M'">09:00 A.M</mat-option>
-                            <mat-option [value]="'10:00 A.M'">10:00 A.M</mat-option>
-                            <mat-option [value]="'11:00 A.M'">11:00 A.M</mat-option>
-                            <mat-option [value]="'12:00 A.M'">12:00 A.M</mat-option>
-                            <mat-option [value]="'13:00 P.M'">13:00 P.M</mat-option>
-                            <mat-option [value]="'14:00 P.M'">14:00 P.M</mat-option>
-                            <mat-option [value]="'15:00 P.M'">15:00 P.M</mat-option>
-                            <mat-option [value]="'16:00 P.M'">16:00 P.M</mat-option>
-                        </mat-select>
+                        <mat-select formControlName="hora">
+                            <mat-option *ngFor="let horario of listHorarios" [value]="horario.id_Horario"> {{ horario.hora }} </mat-option>
+                        </mat-select> 
                         <mat-icon matPrefix>schedule</mat-icon>
                     </mat-form-field>
                 </div>

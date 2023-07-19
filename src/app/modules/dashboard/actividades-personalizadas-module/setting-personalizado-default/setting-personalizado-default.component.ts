@@ -9,6 +9,7 @@ import { ActividadPersonalizadaServicesService } from 'src/app/services/activida
 import { ToastService } from 'src/app/services/toast.service';
 import { SettingPersonalizadoEditComponent } from '../setting-personalizado-edit/setting-personalizado-edit.component';
 import { SettingPersonalizadoInfoComponent } from '../setting-personalizado-info/setting-personalizado-info.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-personalizado-default',
@@ -16,14 +17,15 @@ import { SettingPersonalizadoInfoComponent } from '../setting-personalizado-info
   styleUrls: ['./setting-personalizado-default.component.css']
 })
 export class SettingPersonalizadoDefaultComponent implements OnInit{
-  displayedColumns: string[] = ['nombreUsuario', 'cantidadPersonas', 'hora', 'fecha','estado','accion'];
+  displayedColumns: string[] = ['nombreUsuario', 'cantidadPersonas', 'hora', 'fecha','accion'];
   dataSource = new MatTableDataSource<IPersonalizado>();
   loading: boolean = false;  
 
   constructor(
-    private _actividadService: ActividadPersonalizadaServicesService,
+    private _actividadesServices: ActividadPersonalizadaServicesService,
+    private _toastServices: ToastService,
     public dialog: MatDialog,
-    private toast: ToastService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,11 +35,22 @@ export class SettingPersonalizadoDefaultComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  
+
   obtenerActividades(){
     this.loading = true;
-    this.dataSource.data = this._actividadService.getActividades();
-  }
+    this._actividadesServices.getPersonalizados().subscribe({
+      next: (data) =>{
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
+  }    
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -54,7 +67,7 @@ export class SettingPersonalizadoDefaultComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   } 
-
+ 
   openEdit(actividadData: IPersonalizado){
      this.dialog.open(SettingPersonalizadoEditComponent,{
       autoFocus: false,
@@ -62,11 +75,15 @@ export class SettingPersonalizadoDefaultComponent implements OnInit{
       width: 'auto',
       data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "actualizado"){
+      (datosCierre) => {
+        if(datosCierre == "error"){
           this.obtenerActividades();
-          this.toast.info("Actualizado exitosamente","Enhorabuena")
+          this._toastServices.success("Ha ocurrido un error inesperado","Lo sentimos")
           return
+        }
+        if((datosCierre.resultado == "actualizado")){
+          this.obtenerActividades();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
@@ -77,14 +94,18 @@ export class SettingPersonalizadoDefaultComponent implements OnInit{
       width: '20%',
       data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "eliminado"){
+      (datosCierre) => {
+        if(datosCierre == "error"){
           this.obtenerActividades();
-          this.toast.warning("Eliminación exitosamente","Enhorabuena")
+          this._toastServices.success("Ha ocurrido un error inesperado","Lo sentimos")
           return
         }
+        if((datosCierre.resultado == "eliminado")){
+          this.obtenerActividades();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
+        }
       }
-    ) 
+    )
   }
 
   openInfo(actividadData: IPersonalizado){

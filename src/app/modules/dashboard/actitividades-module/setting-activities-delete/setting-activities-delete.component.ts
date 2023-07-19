@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IActividad } from 'src/app/interfaces/iactividad';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
+import { DELETE_ACTIVIDAD } from 'src/app/interfaces/itransacciones';
 import { ActividadServiceService } from 'src/app/services/actividad-service.service';
 
 @Component({
@@ -17,7 +19,25 @@ export class SettingActivitiesDeleteComponent {
   ) { }
 
   delete(){
-    this._actividadService.deleteActividad(this.data.id_actividad);
-    this.dialogRef.close("eliminado")
+    const actividad: IActividad = {
+      actividadInformacion:{
+        id_ActividadInformacion: this.data.actividadInformacion.id_ActividadInformacion
+      },
+      transaccion: DELETE_ACTIVIDAD
+    }
+
+    this._actividadService.crudActividad(actividad).subscribe({
+      next: (respuesta: IRespuestaSP) => {
+        const datosCierre = {
+          resultado: "eliminado",
+          respuesta: respuesta.respuesta,
+          leyenda: respuesta.leyenda          
+        };
+        this.dialogRef.close(datosCierre);
+      },
+      error: () => {
+        this.dialogRef.close("error");
+      }
+    });
   }
 }

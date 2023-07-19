@@ -2,6 +2,9 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IActividad } from 'src/app/interfaces/iactividad';
+import { IHorario } from 'src/app/interfaces/ihorario';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
+import { POST_ACTIVIDAD, UPDATE_ACTIVIDAD } from 'src/app/interfaces/itransacciones';
 import { ActividadServiceService } from 'src/app/services/actividad-service.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -15,13 +18,14 @@ export class SettingActivitiesAddeditComponent implements OnInit {
   fileName!: any;
   title: string = "Agregar Actividad";
   iconName: string = "add";
+  listHorarios!: IHorario[];
   
   constructor(
     private dialogRef: MatDialogRef<SettingActivitiesAddeditComponent>,
+    private _actividadService: ActividadServiceService,
     @Inject(MAT_DIALOG_DATA) public data: IActividad,
-    private fb: FormBuilder,
-    private toast: ToastService,
-    private _actividadService: ActividadServiceService
+    private _toastServices: ToastService,
+    private fb: FormBuilder
     ) {
     this.form = this.fb.group({
       nombre:               ['', Validators.required],
@@ -40,54 +44,93 @@ export class SettingActivitiesAddeditComponent implements OnInit {
   }  
 
   ngOnInit(): void {
+    this.obtenerHorarios();
     if(this.data){
       this.title              = "Editar Actividad";
       this.iconName           = "edit";
       this.fileName           = this.data.imagen;
       this.form.patchValue({
         nombre:               this.data.nombre,
-        cantidadPersonas:     this.data.cantidadPersonas,
-        cantidadGuias:        this.data.cantidadGuias,
-        precio:               this.data.precio,
-        descripcion:          this.data.descripcion,
-        hora:                 this.data.hora,
-        time:                 this.data.time
+        cantidadPersonas:     this.data.actividadInformacion.cantidadPersonas,
+        cantidadGuias:        this.data.actividadInformacion.cantidadGuias,
+        precio:               this.data.actividadInformacion.precio,
+        descripcion:          this.data.actividadInformacion.descripcion,
+        hora:                 this.data.actividadInformacion.horario?.id_Horario,
+        time:                 this.data.tiempo
       })
     }
   }
 
+  obtenerHorarios(){
+    this._actividadService.getHorarios().subscribe({
+      next: (data) =>{
+        this.listHorarios = data;
+      },
+      error: (e) => {
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
+  }  
+
   accion(){
     if(this.form.invalid){
-      this.toast.error("Campos vacíos","Error")
+      this._toastServices.error("Campos vacíos","Error")
       return
     }
 
-    const acticidad: IActividad = {
-      id_actividad:       (this.data) ? this.data.id_actividad : this._actividadService.actividades.length+1,
-      nombre:             this.form.value.nombre,
-      cantidadPersonas:   this.form.value.cantidadPersonas,
-      cantidadGuias:      this.form.value.cantidadGuias,
-      precio:             this.form.value.precio,
-      descripcion:        this.form.value.descripcion,
-      hora:               this.form.value.hora,
-      time:               this.form.value.time,
-      imagen:             this.fileName.name,
-      estado:             true
+    const actividad: IActividad = {
+      actividadInformacion: {
+        horario: {
+          id_Horario:       this.form.value.hora
+        },
+        cantidadPersonas:   this.form.value.cantidadPersonas,
+        cantidadGuias:      this.form.value.cantidadGuias,
+        precio:             this.form.value.precio,
+        descripcion:        this.form.value.descripcion        
+      },
+      nombre:               this.form.value.nombre,
+      tiempo:               this.form.value.time,
+      imagen:               this.fileName.name
     }
 
     if(this.data){
-      this._actividadService.updateActividad(acticidad)
-      this.dialogRef.close("actualizado")
+      actividad.actividadInformacion.id_ActividadInformacion = this.data.actividadInformacion.id_ActividadInformacion
+      actividad.transaccion = UPDATE_ACTIVIDAD;
+      this._actividadService.crudActividad(actividad).subscribe({
+        next: (respuesta: IRespuestaSP) => {
+          const datosCierre = {
+            resultado: "actualizado",
+            respuesta: respuesta.respuesta,
+            leyenda: respuesta.leyenda   
+          };
+          this.dialogRef.close(datosCierre);
+        },
+        error: () => {
+          this.dialogRef.close("error");
+        }
+      })
       return
     }
 
     if(!this.data){
-      this._actividadService.addActividad(acticidad)
-      this.dialogRef.close("agregado")
+      actividad.transaccion = POST_ACTIVIDAD;
+      this._actividadService.crudActividad(actividad).subscribe({
+        next: (respuesta: IRespuestaSP) => {
+          const datosCierre = {
+            resultado: "agregado",
+            respuesta: respuesta.respuesta,
+            leyenda: respuesta.leyenda   
+          };
+          this.dialogRef.close(datosCierre);
+        },
+        error: () => {
+          this.dialogRef.close("error");
+        }
+      })
       return
     }
     
-    this.toast.error("A ocurrido un error","Lo sentimos")
+    this._toastServices.error("A ocurrido un error","Lo sentimos")
   }
 
 }

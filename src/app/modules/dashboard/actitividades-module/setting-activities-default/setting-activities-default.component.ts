@@ -1,14 +1,15 @@
 import { SettingActivitiesAddeditComponent } from './../setting-activities-addedit/setting-activities-addedit.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { IActividad } from 'src/app/interfaces/iactividad';
+import { SettingActivitiesDeleteComponent } from '../setting-activities-delete/setting-activities-delete.component';
+import { SettingActivitiesInfoComponent } from '../setting-activities-info/setting-activities-info.component';
 import { ActividadServiceService } from 'src/app/services/actividad-service.service';
 import { ToastService } from 'src/app/services/toast.service';
-import { SettingActivitiesInfoComponent } from '../setting-activities-info/setting-activities-info.component';
-import { SettingActivitiesDeleteComponent } from '../setting-activities-delete/setting-activities-delete.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { IActividad } from 'src/app/interfaces/iactividad';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-activities-default',
@@ -16,14 +17,15 @@ import { SettingActivitiesDeleteComponent } from '../setting-activities-delete/s
   styleUrls: ['./setting-activities-default.component.css']
 })
 export class SettingActivitiesDefaultComponent implements OnInit{
-  displayedColumns: string[] = ['nombre', 'cantidadPersonas', 'precio', 'hora', 'time', 'estado','accion'];
+  displayedColumns: string[] = ['nombre', 'cantidadPersonas', 'precio', 'hora', 'time','accion'];
   dataSource = new MatTableDataSource<IActividad>();
   loading: boolean = false;  
 
   constructor(
-    private _actividadService: ActividadServiceService,
+    private _actividadesServices: ActividadServiceService,
     public dialog: MatDialog,
-    private toast: ToastService
+    private _toastServices: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -33,11 +35,20 @@ export class SettingActivitiesDefaultComponent implements OnInit{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  
   obtenerActividades(){
     this.loading = true;
-    this.dataSource.data = this._actividadService.getActividades();
-  }
+    this._actividadesServices.getActividades().subscribe({
+      next: (data) =>{
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
+  }    
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -62,11 +73,15 @@ export class SettingActivitiesDefaultComponent implements OnInit{
       width: '50%',
       height: '500px'
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "agregado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerActividades();
-          this.toast.success("Agregado exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
           return
+        }
+        if((datosCierre.resultado == "agregado")){
+          this.obtenerActividades();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
@@ -79,11 +94,15 @@ export class SettingActivitiesDefaultComponent implements OnInit{
       width: '50%',
       data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "actualizado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerActividades();
-          this.toast.info("Actualizado exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "actualizado")){
+          this.obtenerActividades();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
@@ -94,11 +113,15 @@ export class SettingActivitiesDefaultComponent implements OnInit{
       width: '20%',
       data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "eliminado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerActividades();
-          this.toast.warning("Eliminación exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "eliminado")){
+          this.obtenerActividades();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )

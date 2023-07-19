@@ -43,6 +43,8 @@ import { SettingPersonalizadoDefaultComponent } from './modules/dashboard/activi
 import { SettingPersonalizadoDeleteComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-delete/setting-personalizado-delete.component';
 import { SettingPersonalizadoEditComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-edit/setting-personalizado-edit.component';
 import { SettingPersonalizadoInfoComponent } from './modules/dashboard/actividades-personalizadas-module/setting-personalizado-info/setting-personalizado-info.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from './shared/spinner.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +82,8 @@ import { SettingPersonalizadoInfoComponent } from './modules/dashboard/actividad
     SettingPersonalizadoDefaultComponent,
     SettingPersonalizadoDeleteComponent,
     SettingPersonalizadoEditComponent,
-    SettingPersonalizadoInfoComponent
+    SettingPersonalizadoInfoComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +92,7 @@ import { SettingPersonalizadoInfoComponent } from './modules/dashboard/actividad
     MaterialModule,
     ReactiveFormsModule,
     LayoutModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
