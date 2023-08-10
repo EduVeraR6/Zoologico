@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IAnimales } from 'src/app/interfaces/ianimales';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
+import { POST_ANIMAL, UPDATE_ANIMAL } from 'src/app/interfaces/itransacciones';
 import { AnimalesService } from 'src/app/services/animales-service.service';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -62,28 +64,56 @@ export class SettingAnimalesAddeditComponent implements OnInit {
       return
     }
 
+    
     const animales: IAnimales= {
-      id_animales: (this.data) ? this.data.id_animales : this._animalesService.animales.length + 1,
       nombre: this.form.value.nombre,
       edad: this.form.value.edad,
       especie: this.form.value.especie,
       genero: this.form.value.genero,
-     origen: this.form.value.origen,
+      origen: this.form.value.origen,
       habitat: this.form.value.habitat,
       observaciones: this.form.value.observaciones,
       imagen: this.fileName.name,
-      estado: true
     }
 
     if (this.data) {
-      this._animalesService.updateAnimales(animales)
-      this.dialogRef.close("actualizado")
+
+      animales.id_animales=this.data.id_animales
+      animales.transaccion = UPDATE_ANIMAL;
+      this._animalesService.crudAnimal(animales).subscribe({
+        next : (respuesta:IRespuestaSP)=>{
+        const datosCierre={
+          resultado : "actualizado",
+          respuesta: respuesta.respuesta,
+          leyenda: respuesta.leyenda
+        };
+        this.dialogRef.close(datosCierre);
+        },
+        error: ()=>{
+          this.dialogRef.close("error");
+        }
+      })
       return
     }
 
+  
+
     if (!this.data) {
-      this._animalesService.addAnimales(animales)
-      this.dialogRef.close("agregado")
+      console.log(animales);
+      animales.transaccion = POST_ANIMAL;
+      this._animalesService.crudAnimal(animales).subscribe({
+        next: (respuesta: IRespuestaSP) => {
+          const datosCierre = {
+            resultado: "agregado",
+            respuesta: respuesta.respuesta,
+            leyenda: respuesta.leyenda   
+          };
+          this.dialogRef.close(datosCierre);
+        },
+        error: () => {
+          this.dialogRef.close("error");
+        }
+      })
       return
     }
 
