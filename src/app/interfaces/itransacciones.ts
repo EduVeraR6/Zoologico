@@ -12,6 +12,12 @@ export const UPDATE_PERSONALIZADO   = 'ACTUALIZAR_PERSONALIZADO';
 export const DELETE_PERSONALIZADO   = 'ELIMINAR_PERSONALIZADO';
 
 
+export const GET_VOLUNTARIOS      = 'CONSULTA_VOLUNTARIOS';
+export const POST_VOLUNTARIO         = 'AGREGAR_VOLUNTARIO';
+export const UPDATE_VOLUNTARIO        = 'ACTUALIZAR_VOLUNTARIO';
+export const DELETE_VOLUNTARIO        = 'ELIMINAR_VOLUNTARIO';
+
+
 
 
 export interface ITransacciones {
@@ -26,4 +32,11 @@ export interface ITransacciones {
     POST_PERSONALIZADO:     string
     UPDATE_PERSONALIZADO:   string
     DELETE_PERSONALIZADO:   string
+
+
+    GET_VOLUNTARIOS:        string
+    POST_VOLUNTARIO:         string
+    UPDATE_VOLUNTARIO:       string
+    DELETE_VOLUNTARIO:       string
+    
 }

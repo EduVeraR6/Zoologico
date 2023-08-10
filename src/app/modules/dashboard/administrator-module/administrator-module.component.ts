@@ -23,7 +23,7 @@ export class AdministratorModuleComponent {
     private breakpointObserver: BreakpointObserver,
     private router: Router
     ) {
-       this.usuarioLogeado = this.router.getCurrentNavigation()?.extras.state?.['data'] 
+      //  this.usuarioLogeado = this.router.getCurrentNavigation()?.extras.state?.['data'] --->
     }
 
 }

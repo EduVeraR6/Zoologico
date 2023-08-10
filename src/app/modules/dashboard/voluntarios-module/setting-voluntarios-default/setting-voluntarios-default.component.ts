@@ -1,31 +1,32 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
-import { VoluntariosService } from 'src/app/services/voluntarios-service.service';
-import { ToastService } from 'src/app/services/toast.service';
 import { SettingVoluntariosAddeditComponent } from '../setting-voluntarios-addedit/setting-voluntarios-addedit.component';
 import { SettingVoluntariosDeleteComponent } from '../setting-voluntarios-delete/setting-voluntarios-delete.component';
 import { SettingVoluntariosInfoComponent } from '../setting-voluntarios-info/setting-voluntarios-info.component';
-
+import { VoluntariosService } from 'src/app/services/voluntarios-service.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSort } from '@angular/material/sort';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-setting-voluntarios-default',
   templateUrl: './setting-voluntarios-default.component.html',
   styleUrls: ['./setting-voluntarios-default.component.css']
 })
-export class SettingVoluntariosDefaultComponent {
-  displayedColumns: string[] = ['nombres', 'apellidos', 'cedula', 'edad', 'telefono', 'experiencia','motivacion','estado','accion'];
+export class SettingVoluntariosDefaultComponent implements OnInit{
+  displayedColumns: string[] = ['nombres', 'apellidos', 'cedula', 'edad', 'telefono', 'experiencia','motivacion','accion'];
   dataSource = new MatTableDataSource<IVoluntarios>();
   loading: boolean = false;  
 
   constructor(
-    private _voluntariosService: VoluntariosService,
+    private _voluntariosServices: VoluntariosService,
     public dialog: MatDialog,
-    private toast: ToastService
+    private _toastServices: ToastService,
+    private router: Router
   ) { }
-  
+
   ngOnInit(): void {
     this.obtenerVoluntarios();
   }
@@ -33,17 +34,20 @@ export class SettingVoluntariosDefaultComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  //Truncar Texto -- Animales
-  truncateText(text: string, maxLength: number): string {
-    if (text && text.length > maxLength) {
-      return `${text.substring(0, maxLength)}...`;
-    }
-    return text;
-  }
   obtenerVoluntarios(){
     this.loading = true;
-    this.dataSource.data = this._voluntariosService.getVolutarios();
-  }
+    this._voluntariosServices.getVoluntarios().subscribe({
+      next: (data) =>{
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
+  }    
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -52,6 +56,7 @@ export class SettingVoluntariosDefaultComponent {
       this.paginator._intl.itemsPerPageLabel = "Items por Página ";
     }
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -67,55 +72,64 @@ export class SettingVoluntariosDefaultComponent {
       width: '50%',
       height: '500px'
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "agregado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerVoluntarios();
-          this.toast.success("Agregado exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
           return
+        }
+        if((datosCierre.resultado == "agregado")){
+          this.obtenerVoluntarios();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
   }
 
-  
-  openEdit(voluntariosData: IVoluntarios){
+  openEdit(actividadData: IVoluntarios){
     this.dialog.open(SettingVoluntariosAddeditComponent,{
       autoFocus: false,
       disableClose: true,
       width: '50%',
-      data: voluntariosData
+      data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "actualizado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerVoluntarios();
-          this.toast.info("Actualizado exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "actualizado")){
+          this.obtenerVoluntarios();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
   }
 
-  
-  openDelete(voluntariosData: IVoluntarios){
+  openDelete(actividadData: IVoluntarios){
     this.dialog.open(SettingVoluntariosDeleteComponent,{
       width: '20%',
-      data: voluntariosData
+      data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "eliminado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerVoluntarios();
-          this.toast.warning("Eliminación exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "eliminado")){
+          this.obtenerVoluntarios();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
   }
 
-
-  openInfo(voluntariossData: IVoluntarios){
+  openInfo(actividadData: IVoluntarios){
     this.dialog.open(SettingVoluntariosInfoComponent,{
-      width: '100%',
-      data: voluntariossData     
+      width: '50%',
+      data: actividadData      
     })
   }
 }

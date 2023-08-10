@@ -4,6 +4,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
 import { VoluntariosService } from 'src/app/services/voluntarios-service.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
+import { POST_VOLUNTARIO, UPDATE_VOLUNTARIO } from 'src/app/interfaces/itransacciones';
 
 @Component({
   selector: 'app-setting-voluntarios-addedit',
@@ -13,24 +15,25 @@ import { ToastService } from 'src/app/services/toast.service';
 export class SettingVoluntariosAddeditComponent implements OnInit {
   form: FormGroup;
   fileName!: any;
-  title: string = "Agregar Animal";
+  title: string = "Agregar Voluntario";
   iconName: string = "add";
 
   constructor(
     private dialogRef: MatDialogRef<SettingVoluntariosAddeditComponent>,
+    private _volunService: VoluntariosService,
     @Inject(MAT_DIALOG_DATA) public data: IVoluntarios,
-    private fb: FormBuilder,
-    private toast: ToastService,
-    private _voluntariosService: VoluntariosService
+    private _toastServices: ToastService,
+    private fb: FormBuilder
   ) {
     this.form = this.fb.group({
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
-      cedula: ['', Validators.required],
-      edad: ['', Validators.required],
-      telefono: ['', Validators.required],
-      experiencia: ['', Validators.required],
-      motivacion: ['', Validators.required],
+      nombres:        ['', Validators.required],
+      imagen:         ['', Validators.required],
+      apellidos:      ['', Validators.required],
+      cedula:         ['', Validators.required],
+      edad:           ['', Validators.required],
+      telefono:       ['', Validators.required],
+      experiencia:    ['', Validators.required],
+      motivacion:     ['', Validators.required]
     })
   }
 
@@ -39,55 +42,81 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     if (this.data) {
       this.title = "Editar Voluntario";
       this.iconName = "edit";
       this.fileName = this.data.imagen;
       this.form.patchValue({
-        nombres: this.data.nombres,
-        apellidos: this.data.apellidos,
-        cedula: this.data.cedula,
-        edad: this.data.edad,
-        telefono: this.data.telefono,
-        experiencia: this.data.experiencia,
-        motivacion: this.data.motivacion
+            nombres:      this.data.nombres,
+            apellidos:    this.data.apellidos,
+            cedula:       this.data.cedula,
+            edad:         this.data.edad,
+            telefono:     this.data.telefono,
+            experiencia:  this.data.experiencia,
+            motivacion:   this.data.motivacion
       })
     }
   }
 
   accion() {
     if (this.form.invalid) {
-      this.toast.error("Campos vacíos", "Error")
+        this._toastServices.error("Campos vacíos","Error")
       return
     }
 
     const volunta: IVoluntarios= {
-      
-      id_voluntarios:       (this.data) ? this.data.id_voluntarios : this._voluntariosService.voluntarios.length+1,
-      nombres:              this.form.value.nombres,
-      apellidos:            this.form.value.apellidos,
-      cedula:               this.form.value.cedula,
-      edad:                 this.form.value.edad,
-      telefono:             this.form.value.telefono,
-      experiencia:          this.form.value.experiencia,
-      motivacion:           this.form.value.motivacion,
-      imagen:               this.form.value.imagen,
-      estado:               true
+
+      nombres:        this.form.value.nombres,
+      apellidos:      this.form.value.apellidos,
+      cedula:         this.form.value.cedula,
+      edad:           this.form.value.edad,
+      telefono:       this.form.value.telefono,
+      experiencia:    this.form.value.experiencia,
+      motivacion:     this.form.value.motivacion,
+      imagen:         this.fileName.name
     }
 
     if(this.data){
-      this._voluntariosService.updateVoluntarios(volunta)
-      this.dialogRef.close("actualizado")
+      volunta.id_voluntarios = this.data.id_voluntarios
+      volunta.transaccion = UPDATE_VOLUNTARIO;
+      this._volunService.crudVoluntarios(volunta).subscribe({
+        next: (respuesta: IRespuestaSP) => {
+          const datosCierre = {
+            resultado: "actualizado",
+            respuesta: respuesta.respuesta,
+            leyenda: respuesta.leyenda   
+          };
+          this.dialogRef.close(datosCierre);
+        },
+        error: () => {
+          this.dialogRef.close("error");
+        }
+      })
       return
     }
 
+
     if(!this.data){
-      this._voluntariosService.addVoluntarios(volunta)
-      this.dialogRef.close("agregado")
+      volunta.transaccion = POST_VOLUNTARIO;
+      volunta.estado=true;
+      this._volunService.crudVoluntarios(volunta).subscribe({
+        next: (respuesta: IRespuestaSP) => {
+          const datosCierre = {
+            resultado: "agregado",
+            respuesta: respuesta.respuesta,
+            leyenda: respuesta.leyenda   
+          };
+          this.dialogRef.close(datosCierre);
+        },
+        error: () => {
+          this.dialogRef.close("error");
+        } 
+      })
       return
     }
-    
-    this.toast.error("A ocurrido un error","Lo sentimos")
+
+    this._toastServices.error("A ocurrido un error","Lo sentimos")
   }
 }
 

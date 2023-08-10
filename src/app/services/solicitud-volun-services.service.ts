@@ -17,7 +17,8 @@ export class SolicitudVolunServicesService {
 
 
 getSolicitudes(){
-  return this.solicitudes
+  return this.solicitudes.filter(e => e.estado === true)
+
 }
 
 addActividad(solicitudNew: ISolicitudV){

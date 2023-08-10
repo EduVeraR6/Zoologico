@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RegistrarVoluntariosComponent } from '../registrar-voluntarios/registrar-voluntarios.component';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { RegistrarVoluntariosComponent } from '../registrar-voluntarios/registra
   templateUrl: './voluntarios-component.component.html',
   styleUrls: ['./voluntarios-component.component.css']
 })
-export class VoluntariosComponentComponent {
+export class VoluntariosComponentComponent implements OnInit{
   constructor(private dialog:MatDialog){}
   openDialog(){
     this.dialog.open(RegistrarVoluntariosComponent)

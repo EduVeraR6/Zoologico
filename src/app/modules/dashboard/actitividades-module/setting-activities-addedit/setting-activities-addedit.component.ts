@@ -129,7 +129,6 @@ export class SettingActivitiesAddeditComponent implements OnInit {
       })
       return
     }
-    
     this._toastServices.error("A ocurrido un error","Lo sentimos")
   }
 
