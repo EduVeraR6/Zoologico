@@ -99,7 +99,6 @@ export class SettingAnimalesAddeditComponent implements OnInit {
   
 
     if (!this.data) {
-      console.log(animales);
       animales.transaccion = POST_ANIMAL;
       this._animalesService.crudAnimal(animales).subscribe({
         next: (respuesta: IRespuestaSP) => {

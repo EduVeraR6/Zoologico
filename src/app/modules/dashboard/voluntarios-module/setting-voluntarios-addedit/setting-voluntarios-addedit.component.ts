@@ -20,10 +20,10 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<SettingVoluntariosAddeditComponent>,
-    private _volunService: VoluntariosService,
     @Inject(MAT_DIALOG_DATA) public data: IVoluntarios,
     private _toastServices: ToastService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _volunService: VoluntariosService,
   ) {
     this.form = this.fb.group({
       nombres:        ['', Validators.required],
@@ -99,7 +99,6 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
 
     if(!this.data){
       volunta.transaccion = POST_VOLUNTARIO;
-      volunta.estado=true;
       this._volunService.crudVoluntarios(volunta).subscribe({
         next: (respuesta: IRespuestaSP) => {
           const datosCierre = {

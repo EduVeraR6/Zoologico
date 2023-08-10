@@ -11,7 +11,6 @@ export class SettingVoluntariosInfoComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IVoluntarios
   ) {
-    console.log(data.imagen);
     
   }
 }

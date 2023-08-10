@@ -13,17 +13,14 @@ export class VoluntariosService {
   
   private myAppUrl:string   = environment.endpoint;
   private myApiUrl:string   = 'api/Voluntarios/Voluntarios/';
-  private myApiUrl2:string   = 'api/Voluntarios/';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) {}
 
-
-  getVoluntarios(): Observable<IVoluntarios[]> {
+  getVoluntarios():Observable<IVoluntarios[]>{
     return this.http.get<IVoluntarios[]>(`${this.myAppUrl}${this.myApiUrl}${GET_VOLUNTARIOS}`);
   }
 
-  crudVoluntarios(Voluntario: IVoluntarios): Observable<IRespuestaSP>{
-    return this.http.post<IRespuestaSP>(`${this.myAppUrl}${this.myApiUrl2}`,Voluntario);
+  crudVoluntarios(voluntario : IVoluntarios):Observable<IRespuestaSP>{
+    return this.http.post<IRespuestaSP>(`${this.myAppUrl}${this.myApiUrl}`,voluntario);
   }
-
 }

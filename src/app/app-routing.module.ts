@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'Voluntarios',      component: VoluntariosComponentComponent },
   { path: 'administrator',    component:  AdministratorModuleComponent,
     children: [
-      { path: '',                             redirectTo: 'default-animales', pathMatch: 'full'},      
+      { path: '',                             redirectTo: 'default-voluntarios', pathMatch: 'full'},      
       { path: 'default-activities',           component: SettingActivitiesDefaultComponent },
       { path: 'default-animales',             component: SettingAnimalesDefaultComponent},
       { path: 'users-activities',             component: SettingPersonalizadoDefaultComponent },
