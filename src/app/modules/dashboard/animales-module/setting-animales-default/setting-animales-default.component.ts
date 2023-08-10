@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/services/toast.service';
 import { SettingAnimalesAddeditComponent } from '../setting-animales-addedit/setting-animales-addedit.component';
 import { SettingAnimalesDeleteComponent } from '../setting-animales-delete/setting-animales-delete.component';
 import { SettingAnimalesInfoComponent } from '../setting-animales-info/setting-animales-info.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting-animales-default',
@@ -16,14 +17,15 @@ import { SettingAnimalesInfoComponent } from '../setting-animales-info/setting-a
   styleUrls: ['./setting-animales-default.component.css']
 })
 export class SettingAnimalesDefaultComponent {
-  displayedColumns: string[] = ['nombre', 'edad', 'especie', 'genero', 'origen', 'habitat','observaciones','estado','accion'];
+  displayedColumns: string[] = ['nombre', 'edad', 'especie', 'genero', 'origen', 'habitat','observaciones','accion'];
   dataSource = new MatTableDataSource<IAnimales>();
   loading: boolean = false;  
 
   constructor(
     private _animalesService: AnimalesService,
     public dialog: MatDialog,
-    private toast: ToastService
+    private toast: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +46,17 @@ export class SettingAnimalesDefaultComponent {
   
   obtenerAnimales(){
     this.loading = true;
-    this.dataSource.data = this._animalesService.getAnimales();
+    this._animalesService.getAnimales().subscribe({
+      next: (data) =>{
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this.toast.error("Problemas con el servidor","Error")
+      }
+    })
   }
 
   ngAfterViewInit() {
@@ -70,11 +82,15 @@ export class SettingAnimalesDefaultComponent {
       width: '50%',
       height: '500px'
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "agregado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerAnimales();
-          this.toast.success("Agregado exitosamente","Enhorabuena")
+          this.toast.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
           return
+        }
+        if((datosCierre.resultado == "agregado")){
+          this.obtenerAnimales();
+          this.toast.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
@@ -87,11 +103,15 @@ export class SettingAnimalesDefaultComponent {
       width: '50%',
       data: animalesData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "actualizado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerAnimales();
-          this.toast.info("Actualizado exitosamente","Enhorabuena")
+          this.toast.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "actualizado")){
+          this.obtenerAnimales();
+          this.toast.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
@@ -102,11 +122,15 @@ export class SettingAnimalesDefaultComponent {
       width: '20%',
       data: animalesData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "eliminado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerAnimales();
-          this.toast.warning("Eliminación exitosamente","Enhorabuena")
+          this.toast.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);  
           return
+        }
+        if((datosCierre.resultado == "eliminado")){
+          this.obtenerAnimales();
+          this.toast.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )

@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ImageDialogComponent } from 'src/app/shared/ImageDialogComponent';
 import { IAnimales } from 'src/app/interfaces/ianimales';
 import { AnimalesService } from 'src/app/services/animales-service.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-animales-lista-layouts',
@@ -12,15 +14,21 @@ import { AnimalesService } from 'src/app/services/animales-service.service';
 export class AnimalesListaLayoutsComponent implements OnInit{
  
   animales! : IAnimales[];
+  loading:boolean = false;
   paginasAnimales : IAnimales[]=[]
   tamañoPagina = 5;
   paginaActual =0;
 
-  constructor(private animalesServices : AnimalesService, private dialog: MatDialog ){}
+  constructor(
+    private animalesServices : AnimalesService,
+    private dialog: MatDialog,
+    private router: Router,
+    private _toastServices: ToastService
+    ){}
 
-  ngOnInit(): void {
-    this.animales = this.animalesServices.animales.filter(elemento => elemento.especie);
-    this.updatePaginatedAnimales();
+
+  ngOnInit(){
+    this.obtenerAnimales();
   }
 
   //Zoom Imagen
@@ -29,6 +37,23 @@ export class AnimalesListaLayoutsComponent implements OnInit{
       data: { imageUrl },
       panelClass: 'custom-dialog-container' // Clase CSS personalizada para el diálogo
     });
+  }
+
+
+  obtenerAnimales(){
+    this.loading = true;
+    this.animalesServices.getAnimales().subscribe({
+      next: (data) =>{      
+        this.loading = false;
+        this.animales = data.filter(e => e.id_animales);
+        this.updatePaginatedAnimales();                  
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
   }
   
 
