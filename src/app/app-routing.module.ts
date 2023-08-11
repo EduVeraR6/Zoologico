@@ -30,7 +30,8 @@ const routes: Routes = [
       { path: 'default-activities',           component: SettingActivitiesDefaultComponent },
       { path: 'default-animales',             component: SettingAnimalesDefaultComponent},
       { path: 'users-activities',             component: SettingPersonalizadoDefaultComponent },
-      { path: 'default-voluntarios',          component: SettingVoluntariosDefaultComponent }
+      { path: 'default-voluntarios',          component: SettingVoluntariosDefaultComponent },
+      { path: 'default-solicitud',            component: SettingSolicitudVDefaultComponent },      
     ]
   },
   { path: '**',               redirectTo: 'home', pathMatch: 'full' }

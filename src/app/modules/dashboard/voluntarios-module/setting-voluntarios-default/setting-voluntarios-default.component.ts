@@ -10,13 +10,14 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { Router } from '@angular/router';
+import { GET_VOLUNTARIOS } from 'src/app/interfaces/itransacciones';
 @Component({
   selector: 'app-setting-voluntarios-default',
   templateUrl: './setting-voluntarios-default.component.html',
   styleUrls: ['./setting-voluntarios-default.component.css']
 })
 export class SettingVoluntariosDefaultComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'apellidos', 'cedula', 'edad', 'telefono', 'experiencia','motivacion','accion'];
+  displayedColumns: string[] = ['nombres', 'cedula', 'edad', 'telefono', 'experiencia','accion'];
   dataSource = new MatTableDataSource<IVoluntarios>();
   loading: boolean = false;  
 
@@ -36,7 +37,7 @@ export class SettingVoluntariosDefaultComponent implements OnInit{
 
   obtenerVoluntarios(){
     this.loading = true;
-    this._voluntariosServices.getVoluntarios().subscribe({
+    this._voluntariosServices.getVoluntarios(GET_VOLUNTARIOS).subscribe({
       next: (data) =>{
         this.loading = false;
         this.dataSource.data = data;
@@ -55,7 +56,7 @@ export class SettingVoluntariosDefaultComponent implements OnInit{
     if(this.dataSource.data.length > 0){
       this.paginator._intl.itemsPerPageLabel = "Items por Página ";
     }
-  }
+  } 
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -70,7 +71,7 @@ export class SettingVoluntariosDefaultComponent implements OnInit{
       autoFocus: false,
       disableClose: true,
       width: '50%',
-      height: '500px'
+      height: 'Auto'
     }).afterClosed().subscribe(
       (datosCierre) => {
         if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
@@ -132,4 +133,5 @@ export class SettingVoluntariosDefaultComponent implements OnInit{
       data: actividadData      
     })
   }
+  
 }

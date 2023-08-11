@@ -1,15 +1,16 @@
+import { GET_SOLICITUDES } from './../../../../interfaces/itransacciones';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ISolicitudV } from 'src/app/interfaces/ivoluntarios';
-import { SolicitudVolunServicesService } from 'src/app/services/solicitud-volun-services.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { SettingSolicitudVEditComponent } from '../setting-solicitud-v-edit/setting-solicitud-v-edit.component';
 import { SettingSolicitudVInfoComponent } from '../setting-solicitud-v-info/setting-solicitud-v-info.component';
-import { IsActiveMatchOptions } from '@angular/router';
 import { SettingSolicitudVDeleteComponent } from '../setting-solicitud-v-delete/setting-solicitud-v-delete.component';
+import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
+import { Router } from '@angular/router';
+import { VoluntariosService } from 'src/app/services/voluntarios-service.service';
 
 
 @Component({
@@ -18,14 +19,15 @@ import { SettingSolicitudVDeleteComponent } from '../setting-solicitud-v-delete/
   styleUrls: ['./setting-solicitud-v-default.component.css']
 })
 export class SettingSolicitudVDefaultComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'apellidos', 'cedula', 'edad','telefono','experiencia','motivacion','estado','accion'];
-  dataSource = new MatTableDataSource<ISolicitudV>();
+  displayedColumns: string[] = ['nombres', 'apellidos', 'cedula', 'edad','telefono','accion'];
+  dataSource = new MatTableDataSource<IVoluntarios>();
   loading: boolean = false;  
 
   constructor(
-    private _solicitudService: SolicitudVolunServicesService,
+    private _solicitudService: VoluntariosService,
     public dialog: MatDialog,
-    private toast: ToastService
+    private _toastServices: ToastService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +40,17 @@ export class SettingSolicitudVDefaultComponent implements OnInit{
   
   obtenerSolicitud(){
     this.loading = true;
-    this.dataSource.data = this._solicitudService.getSolicitudes();
+    this._solicitudService.getVoluntarios(GET_SOLICITUDES).subscribe({
+      next: (data) =>{
+        this.loading = false;
+        this.dataSource.data = data;
+      },
+      error: (e) => {
+        this.loading = false
+        this.router.navigate([''])
+        this._toastServices.error("Problemas con el servidor","Error")
+      }
+    })
   }
 
   ngAfterViewInit() {
@@ -57,39 +69,71 @@ export class SettingSolicitudVDefaultComponent implements OnInit{
     }
   } 
 
-  openEdit(actividadData: ISolicitudV){
+  openEdit(actividadData: IVoluntarios){
      this.dialog.open(SettingSolicitudVEditComponent,{
       autoFocus: false,
       disableClose: true,
       width: 'auto',
       data: actividadData
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "actualizado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerSolicitud();
-          this.toast.info("Actualizado exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
           return
+        }
+        if((datosCierre.resultado == "actualizado")){
+          this.obtenerSolicitud();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     )
   }
 
-  openDelete(actividadData: ISolicitudV){
+  openAceptar(actividadData: IVoluntarios){
      this.dialog.open(SettingSolicitudVDeleteComponent,{
       width: '20%',
-      data: actividadData
+      data: {
+        actividadData: actividadData,
+        bandera: "aceptar"
+      }
     }).afterClosed().subscribe(
-      (data) => {
-        if(data == "eliminado"){
+      (datosCierre) => {
+        if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
           this.obtenerSolicitud();
-          this.toast.warning("Eliminación exitosamente","Enhorabuena")
+          this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
           return
+        }
+        if((datosCierre.resultado == "respuesta")){
+          this.obtenerSolicitud();
+          this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
         }
       }
     ) 
   }
 
-  openInfo(actividadData: ISolicitudV){
+  openRechazar(actividadData: IVoluntarios){
+    this.dialog.open(SettingSolicitudVDeleteComponent,{
+     width: '20%',
+     data: {
+      actividadData: actividadData
+    }
+   }).afterClosed().subscribe(
+     (datosCierre) => {
+       if(datosCierre == "error" || datosCierre.respuesta === 'ERROR'){
+         this.obtenerSolicitud();
+         this._toastServices.error(`${datosCierre.leyenda}, Intente luego`,`${datosCierre.respuesta}`);       
+         return
+       }
+       if((datosCierre.resultado == "respuesta")){
+         this.obtenerSolicitud();
+         this._toastServices.success(`${datosCierre.leyenda}`,`${datosCierre.respuesta}`);
+       }
+     }
+   ) 
+ }
+
+  openInfo(actividadData: IVoluntarios){
      this.dialog.open(SettingSolicitudVInfoComponent,{
       width: 'auto',
       data: actividadData      

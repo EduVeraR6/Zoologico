@@ -1,63 +1,68 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
-import { NavigationExtras, Router } from '@angular/router';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
 import { ToastService } from 'src/app/services/toast.service';
-import { MatDialogModule } from '@angular/material/dialog';
-import { ISolicitudV } from 'src/app/interfaces/ivoluntarios';
-import { SolicitudVolunServicesService } from 'src/app/services/solicitud-volun-services.service';
+import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
+import { POST_SOLICITUDES } from 'src/app/interfaces/itransacciones';
+import { VoluntariosService } from 'src/app/services/voluntarios-service.service';
+import { IRespuestaSP } from 'src/app/interfaces/irespuesta-sp';
 
 @Component({
   selector: 'app-registrar-voluntarios',
   templateUrl: './registrar-voluntarios.component.html',
   styleUrls: ['./registrar-voluntarios.component.css']
 })
+
 export class RegistrarVoluntariosComponent {
-  voluntariosNuevos: FormGroup;
+  form: FormGroup;
+
   constructor(
-    private toast: ToastService,
-    private dialog:MatDialog,
-    private _soliService: SolicitudVolunServicesService,
+    private _toastServices: ToastService,
+    private dialogRef: MatDialogRef<RegistrarVoluntariosComponent>,
+    private _volunService: VoluntariosService,
     private fb: FormBuilder,
     private router: Router
 
-  ){ this.voluntariosNuevos = this.fb.group({
-    nombres:                 ['', Validators.required],
-    apellidos:               ['', Validators.required],
-    cedula:                  ['', Validators.required],
-    edad:                    ['', Validators.required],
-    telefono:                ['', Validators.required],
-    experiencia:             ['', Validators.required],
-    motivacion:            ['', Validators.required],
+  ){ this.form = this.fb.group({
+    nombres:        ['', Validators.required],
+    apellidos:      ['', Validators.required],
+    cedula:         ['', Validators.required],
+    edad:           ['', Validators.required],
+    telefono:       ['', Validators.required],
+    experiencia:    ['', Validators.required],
+    motivacion:     ['', Validators.required],
   })}
-
     
-    
-    accion() {
-      if (this.voluntariosNuevos.invalid) {
-        this.toast.error("Campos vacíos", "Error");
-        return
-      }else{
-        this.toast.success("Solicitud enviada con exito", "Success");
-        this.router.navigate(['/Voluntarios']);
-        this.dialog.closeAll();
-      }
-      const solicitud: ISolicitudV = {
-        id_solicitud:     this._soliService.solicitudes.length+1,
-        nombres:        this.voluntariosNuevos.value.nombres,
-        apellidos:             this.voluntariosNuevos.value.apellidos,
-        cedula:     this.voluntariosNuevos.value.cedula,
-        edad:        this.voluntariosNuevos.value.edad,
-        telefono:                 this.voluntariosNuevos.value.telefono,
-        experiencia:                this.voluntariosNuevos.value.experiencia,
-        motivacion:          this.voluntariosNuevos.value.motivacion,
-        estado:               true
-      }
-      this._soliService.addActividad(solicitud);
+  accion() {
+    if (this.form.invalid) {
+      this._toastServices.error("Campos vacíos","Error")
+      return
     }
+
+    const voluntario: IVoluntarios= {
+      nombres:        this.form.value.nombres,
+      apellidos:      this.form.value.apellidos,
+      cedula:         this.form.value.cedula,
+      edad:           this.form.value.edad,
+      telefono:       this.form.value.telefono,
+      experiencia:    this.form.value.experiencia,
+      motivacion:     this.form.value.motivacion
+    }
+    voluntario.transaccion = POST_SOLICITUDES;
+
+    this._volunService.crudVoluntarios(voluntario).subscribe({
+      next: (respuesta: IRespuestaSP) => {
+        const datosCierre = {
+          resultado: "agregado",
+          respuesta: respuesta.respuesta,
+          leyenda: respuesta.leyenda   
+        };
+        this.dialogRef.close(datosCierre);
+      },
+      error: () => {
+        this.dialogRef.close("error");
+      } 
+    })
+  }
 }

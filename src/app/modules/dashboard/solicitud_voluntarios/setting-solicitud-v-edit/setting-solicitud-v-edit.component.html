@@ -6,7 +6,8 @@
             </div>
             <div class="card-body px-5">
                 <form [formGroup]="form" (ngSubmit)="enviar()">
-                    <div class="row row-cols-2 mt-4">
+
+                    <div class="row row-cols-1 mt-4">
                         <div class="col">
                             <mat-form-field appearance="outline">
                                 <mat-label> Nombres</mat-label>
@@ -14,8 +15,6 @@
                                 <mat-icon matPrefix>person</mat-icon>
                             </mat-form-field>
                         </div>
-
-
                     </div>
 
                     <div class="row row-cols-2">
@@ -29,11 +28,10 @@
                         <div class="col">
                             <mat-form-field appearance="outline">
                                 <mat-label> Cedula : </mat-label>
-                                <input type="number" matInput autocomplete="off" formControlName="cedula">
+                                <input type="text" matInput autocomplete="off" formControlName="cedula">
                                 <mat-icon matPrefix>person</mat-icon>
                             </mat-form-field>
                         </div>
-
                     </div>
 
                     <div class="row row-cols-2">
@@ -47,11 +45,10 @@
                         <div class="col">
                             <mat-form-field appearance="outline">
                                 <mat-label> Telefono : </mat-label>
-                                <input type="number" matInput autocomplete="off" formControlName="telefono">
+                                <input type="tel" matInput autocomplete="off" formControlName="telefono">
                                 <mat-icon matPrefix>phone</mat-icon>
                             </mat-form-field>
                         </div>
-
                     </div>
 
                     <div class="row row-cols-2">
@@ -70,6 +67,7 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    
                     <div class="row row-cols-2">
                         <div class="col">
                             <button class="btn btn-danger w-100 btn-sm" mat-dialog-close>

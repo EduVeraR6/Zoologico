@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ISolicitudV } from '../interfaces/ivoluntarios';
+import { IVoluntarios } from '../interfaces/ivoluntarios';
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +7,9 @@ import { ISolicitudV } from '../interfaces/ivoluntarios';
 export class SolicitudVolunServicesService {
 
   constructor() { }
-  solicitudes: ISolicitudV[] = [
+  solicitudes: IVoluntarios[] = [
     {
-      id_solicitud: 1, nombres: "Juan",apellidos:"Vargas",cedula:"0832132153",edad:45, telefono: "1234567890",
+      id_Voluntarios: 1, nombres: "Juan",apellidos:"Vargas",cedula:"0832132153",edad:45, telefono: "1234567890",
       experiencia:"Ninguna" ,motivacion: "Querer cuidar a los animales y su habitat",estado: true
     }
   ];
@@ -21,13 +21,13 @@ getSolicitudes(){
 
 }
 
-addActividad(solicitudNew: ISolicitudV){
+addActividad(solicitudNew: IVoluntarios){
   this.solicitudes.push(solicitudNew)
 }
 
-updateActividad(solicitudUpdate: ISolicitudV) {
+updateActividad(solicitudUpdate: IVoluntarios) {
   this.solicitudes.forEach(elemento => {
-    if (elemento.id_solicitud === solicitudUpdate.id_solicitud) {
+    if (elemento.id_Voluntarios === solicitudUpdate.id_Voluntarios) {
       Object.assign(elemento, solicitudUpdate);
     }
   });
@@ -35,7 +35,7 @@ updateActividad(solicitudUpdate: ISolicitudV) {
 
 deleteActividad(id: number){
   this.solicitudes.forEach(elemento => {
-    if(elemento.id_solicitud === id){
+    if(elemento.id_Voluntarios === id){
       elemento.estado = false
     }
   })

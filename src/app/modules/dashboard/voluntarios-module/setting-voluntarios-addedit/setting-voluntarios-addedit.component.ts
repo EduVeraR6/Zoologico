@@ -66,7 +66,6 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
     }
 
     const volunta: IVoluntarios= {
-
       nombres:        this.form.value.nombres,
       apellidos:      this.form.value.apellidos,
       cedula:         this.form.value.cedula,
@@ -78,7 +77,7 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
     }
 
     if(this.data){
-      volunta.id_voluntarios = this.data.id_voluntarios
+      volunta.id_Voluntarios = this.data.id_Voluntarios
       volunta.transaccion = UPDATE_VOLUNTARIO;
       this._volunService.crudVoluntarios(volunta).subscribe({
         next: (respuesta: IRespuestaSP) => {
@@ -114,7 +113,6 @@ export class SettingVoluntariosAddeditComponent implements OnInit {
       })
       return
     }
-
     this._toastServices.error("A ocurrido un error","Lo sentimos")
   }
 }

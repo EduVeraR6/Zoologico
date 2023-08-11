@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ISolicitudV } from 'src/app/interfaces/ivoluntarios';
+import { IVoluntarios } from 'src/app/interfaces/ivoluntarios';
 
 @Component({
   selector: 'app-setting-solicitud-v-info',
@@ -9,6 +9,6 @@ import { ISolicitudV } from 'src/app/interfaces/ivoluntarios';
 })
 export class SettingSolicitudVInfoComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: ISolicitudV
+    @Inject(MAT_DIALOG_DATA) public data: IVoluntarios
   ) { }
 }

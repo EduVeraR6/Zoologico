@@ -18,7 +18,7 @@ export class SettingVoluntariosDeleteComponent {
 
   delete(){
     const volunta: IVoluntarios = {
-        id_voluntarios: this.data.id_voluntarios,
+        id_Voluntarios: this.data.id_Voluntarios,
         transaccion: DELETE_VOLUNTARIO
     }
     this._voluntariosService.crudVoluntarios(volunta).subscribe({

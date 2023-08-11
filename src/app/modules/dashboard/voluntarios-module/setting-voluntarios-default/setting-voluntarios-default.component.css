@@ -1,5 +1,5 @@
 .container-fluid {
-    height: 100vh;
+    height: 80vh;
 }
 
 .title {
@@ -34,17 +34,14 @@
     font-size: 1rem;
 }
 
+
 table {
     width: 100%;
 }
-
-td,
-th {
-    width: 5%;
+  
+td, th {
+    width: 20%;
     font-size: .8rem;
-    white-space: nowrap;
-    overflow: auto;
-    text-overflow: ellipsis;
 }
 
 .container-table {
