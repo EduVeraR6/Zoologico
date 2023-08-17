@@ -27,4 +27,4 @@ export const POST_ANIMAL            = 'AGREGAR_ANIMAL';
 export const UPDATE_ANIMAL          = 'ACTUALIZAR_ANIMAL';
 export const DELETE_ANIMAL          = 'ELIMINAR_ANIMAL';
 
-export const GET_USUARIOS = 'CONSULTAR_USUARIO_LOGIN';
+export const GET_USUARIOS           = 'CONSULTAR_USUARIO_LOGIN';
