@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 import { IUsuario } from 'src/app/interfaces/iusuario';
-import { LoginService } from 'src/app/services/login.service';
+
 import { ToastService } from 'src/app/services/toast.service';
 
 
@@ -11,54 +12,48 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  form: FormGroup;
-  hide = true;
-  usuarioLogeado!: IUsuario;
 
+export class LoginComponent {
+
+  hide = true;
+  loading: boolean = false;  
+  usuarioTemp : any;
+  passwordTemp : any;
 
   constructor (
     private toast: ToastService,
     private fb: FormBuilder,
-    private _loginService: LoginService,
+    private _loginService: AuthService,
     private router: Router
-  ){
-    this.form = this.fb.group({
-      usuario: ['', Validators.required],
-      password: ['', Validators.required]
-    })
-  }
-
-
-  ingresar(){
-    if(this.form.invalid){
-      this.toast.error("Campos vacíos","Error");
-      return
-    }
     
-    const usuario: IUsuario ={
-      user:       this.form.value.usuario,
-      password:   this.form.value.password
-    }
+  ) {}
 
-    if(!this._loginService.verificarUser(usuario.user)){
-      this.toast.error("Usuarios ingresado no éxiste","Lo sentimos");
-      return
-    }
+  usuarioLogin = new FormGroup({
+    cedula : new FormControl('',Validators.required),
+    password : new FormControl('',Validators.required),
+    transaccion : new FormControl('')
+  })
 
-    if(!this._loginService.verificarPass(usuario.password)){
-      this.toast.warning("Contraseña invalida","Intente de nuevo");
-      return
-    }
-
-    if(this._loginService.verificacionFinal(usuario.user, usuario.password)){
-      this.usuarioLogeado = this._loginService.verificacionFinal(usuario.user, usuario.password)
-      this.router.navigate(['/administrator'],{
-        state:{
-          data: this.usuarioLogeado
+  onSubmit() {
+    this.usuarioLogin.value.transaccion = "CONSULTAR_USUARIO_LOGIN";
+    this.usuarioTemp = this.usuarioLogin.value.cedula;
+    this.passwordTemp = this.usuarioLogin.value.password;
+  
+    this._loginService.login(this.usuarioLogin.value as IUsuario).subscribe(
+      (data: any) => {
+        console.log(data);
+  
+        // Verificar si la respuesta del servidor indica un inicio de sesión exitoso
+        if (data) {
+          localStorage.setItem('userName', this.usuarioTemp);
+          localStorage.setItem('token_value', data);
+          this.toast.success("Inicio de Sesion Exitoso","Bienvenido")
+          this.router.navigate(['/administrator']);
+        } else {
+          this.toast.error("Error Inicio de Sesion","Credenciales Incorrectas")
         }
-      })
-      this.toast.success("Bienvenido "+this.usuarioLogeado.user,"Enhorabuena")
-    }
-  }
+      },
+      (errorData) => alert(errorData)
+    );
+  }  
 }

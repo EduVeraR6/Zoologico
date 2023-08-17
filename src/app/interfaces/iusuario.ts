@@ -1,5 +1,7 @@
 export interface IUsuario {
-    id?:        number,
-    user:       string,
-    password:   string
+    id:        number,
+    cedula:       string,
+    password:   string,
+    transaccion : string
+
 }
