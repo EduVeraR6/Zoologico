@@ -40,7 +40,7 @@ export class SettingSolicitudVDefaultComponent implements OnInit{
   
   obtenerSolicitud(){
     this.loading = true;
-    this._solicitudService.getVoluntarios(GET_SOLICITUDES).subscribe({
+    this._solicitudService.getVoluntarios().subscribe({
       next: (data) =>{
         this.loading = false;
         this.dataSource.data = data;

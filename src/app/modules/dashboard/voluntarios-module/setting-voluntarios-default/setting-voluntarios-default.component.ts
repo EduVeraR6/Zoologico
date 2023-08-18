@@ -37,7 +37,7 @@ export class SettingVoluntariosDefaultComponent implements OnInit{
 
   obtenerVoluntarios(){
     this.loading = true;
-    this._voluntariosServices.getVoluntarios(GET_VOLUNTARIOS).subscribe({
+    this._voluntariosServices.getVoluntarios().subscribe({
       next: (data) =>{
         this.loading = false;
         this.dataSource.data = data;

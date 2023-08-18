@@ -40,7 +40,7 @@ export class ListasVoluntariosComponent implements OnInit {
 
   obtenerVoluntarios(){
     this.loading = true;
-    this._voluntariosServices.getVoluntarios(GET_VOLUNTARIOS).subscribe({
+    this._voluntariosServices.getVoluntarios().subscribe({
       next: (data) =>{        
         this.loading = false;
         this.people = data;

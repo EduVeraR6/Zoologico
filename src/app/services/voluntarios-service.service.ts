@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IVoluntarios } from '../interfaces/ivoluntarios';
 import { IRespuestaSP } from '../interfaces/irespuesta-sp';
+import { GET_VOLUNTARIOS } from '../interfaces/itransacciones';
+import  {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +17,15 @@ export class VoluntariosService {
 
   constructor(private http:HttpClient) {}
 
-  getVoluntarios(transacion: string):Observable<IVoluntarios[]>{
-    return this.http.get<IVoluntarios[]>(`${this.myAppUrl}${this.myApiUrl}${transacion}`);
+  getVoluntarios():Observable<IVoluntarios[]>{
+    let auth_token = localStorage.getItem('token_value');
+   
+    const header = new HttpHeaders({
+        'Content-Type':'application/json',
+        'Authorization':`bearer ${auth_token}`
+    });
+    return this.http.get<IVoluntarios[]>(`${this.myAppUrl}${this.myApiUrl}${GET_VOLUNTARIOS}`,{headers : header});
   }
-
   crudVoluntarios(voluntario: IVoluntarios): Observable<IRespuestaSP>{
     return this.http.post<IRespuestaSP>(`${this.myAppUrl}${this.myApiUrl}`,voluntario);
   }
